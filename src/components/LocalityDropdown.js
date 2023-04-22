@@ -22,7 +22,7 @@ const LocalityDropdown = () => {
   }, []);
 
   return (
-    <Menu as="div" className="dropdown relative  ">
+    <Menu as="div" className="dropdown relative">
       <Menu.Button
         onClick={() => setIsOpen(!isOpen)}
         className="dropdown-btn w-full text-left"
@@ -33,19 +33,19 @@ const LocalityDropdown = () => {
           <div className="sm:text-md text-sm font-medium leading-tight"> {locality} </div>
         </div>
         {isOpen ? (
-          <RiArrowUpSLine className="dropdown-icon-secondary" />
-        ) : (
           <RiArrowDownSLine className="dropdown-icon-secondary" />
+        ) : (
+          <RiArrowUpSLine className="dropdown-icon-secondary" />
         )}
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu text-center ">
         {
-          localities.map((locality, index) => (
+          localities.map((locality) => (
             <Menu.Item as="li" className="menu-item" key={locality}>
               <button
                 onClick={() => {
-                  setlocality((index + 1).toString());
+                  setlocality(locality);
                   setIsOpen(false);
                 }}
                 className="menu-item-btn"
