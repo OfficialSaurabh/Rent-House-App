@@ -8,8 +8,7 @@ import { Menu } from "@headlessui/react";
 import axios from "axios";
 // import context
 
-const LocalityDropdown = () => {
-  const [locality, setlocality] = useState("");
+const LocalityDropdown = ({ locality, setlocality }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [localities, setLocalities] = useState([]);
 

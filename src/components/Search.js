@@ -5,10 +5,25 @@ import BedsDropDown from "./BedsDropDown";
 // import icon
 import { RiSearch2Line } from "react-icons/ri";
 import LocalityDropdown from "./LocalityDropdown";
+import { useState } from "react";
 
-const Search = () => {
+const Search = ({ setFilter }) => {
+  const [bedroom, setBedroom] = useState("");
+  const [price, setPrice] = useState("");
+  const [locality, setlocality] = useState("");
+
   const handleClick = () => {
-    console.log("clicked");
+    let min = 0;
+    let max = 1000000000;
+    if (price && price !== "All Range") {
+      [min, max] = price.split(" - ");
+    }
+    setFilter({
+      beds: +bedroom,
+      lowerprice: +min,
+      upperprice: +max,
+      locality: locality,
+    });
   };
   return (
     <div className=" bg-gray-100">
@@ -19,13 +34,13 @@ const Search = () => {
         </p>
         <div className=" flex justify-center md:justify-start gap-5 items-center flex-wrap p-2">
           <div className="">
-            <BedsDropDown />
+            <BedsDropDown bedroom={bedroom} setBedroom={setBedroom} />
           </div>
           <div className=" ">
-            <PriceRangeDropdown />
+            <PriceRangeDropdown price={price} setPrice={setPrice} />
           </div>
           <div className=" ">
-            <LocalityDropdown />
+            <LocalityDropdown locality={locality} setlocality={setlocality} />
           </div>
           <div className=" ">
             <button

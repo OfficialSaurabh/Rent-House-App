@@ -23,11 +23,15 @@ export default async function handler(req, res) {
     filter.where.beds = parseInt(params.beds);
   }
 
-  if (params.lowerPrice && params.upperPrice) {
+  if (params.lowerprice && params.upperprice) {
     filter.where.price = {
-      gte: parseInt(params.lowerPrice),
-      lte: parseInt(params.upperPrice),
+      gte: parseInt(params.lowerprice),
+      lte: parseInt(params.upperprice),
     };
+  }
+
+  if (params.locality) {
+    filter.where.locality = params.locality;
   }
 
   // Get homes by bedrooms
