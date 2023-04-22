@@ -1,15 +1,26 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 // import icons
 import { RiHome5Line, RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 import { CiLocationOn } from "react-icons/ci";
 
 // import headless ui components
 import { Menu } from "@headlessui/react";
+import axios from "axios";
 // import context
 
 const LocalityDropdown = () => {
-  const [ locality, setlocality] = useState("");
+  const [locality, setlocality] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [localities, setLocalities] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/localities").then(res => {
+      // get unique localities
+      const uniqueLocalities = [...new Set(res.data.map(home => home.locality))];
+      setLocalities(uniqueLocalities);
+    });
+  }, []);
+
   return (
     <Menu as="div" className="dropdown relative  ">
       <Menu.Button
@@ -29,51 +40,21 @@ const LocalityDropdown = () => {
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu text-center ">
-       <Menu.Item as="li" className="menu-item">
-          <button
-            onClick={() => {
-              setlocality("1");
-              setIsOpen(false);
-            }}
-            className="menu-item-btn"
-          >
-            Bidhannagar
-          </button>
-        </Menu.Item>
-        <Menu.Item as="li" className="menu-item">
-          <button
-            onClick={() => {
-              setlocality("2");
-              setIsOpen(false);
-            }}
-            className="menu-item-btn"
-          >
-            Pump House
-          </button>
-        </Menu.Item>
-        <Menu.Item as="li" className="menu-item">
-          <button
-            onClick={() => {
-              setlocality("3");
-              setIsOpen(false);
-            }}
-            className="menu-item-btn"
-          >
-            Station Road
-          </button>
-        </Menu.Item>
-        <Menu.Item as="li" className="menu-item">
-          <button
-            onClick={() => {
-              setlocality("4");
-              setIsOpen(false);
-            }}
-            className="menu-item-btn"
-          >
-            Stell Park
-          </button>
-        </Menu.Item>
-
+        {
+          localities.map((locality, index) => (
+            <Menu.Item as="li" className="menu-item" key={locality}>
+              <button
+                onClick={() => {
+                  setlocality((index + 1).toString());
+                  setIsOpen(false);
+                }}
+                className="menu-item-btn"
+              >
+                {locality}
+              </button>
+            </Menu.Item>
+          ))
+        }
       </Menu.Items>
     </Menu>
   );
