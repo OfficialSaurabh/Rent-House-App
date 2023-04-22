@@ -19,6 +19,10 @@ export default async function handler(req, res) {
     where: {}
   };
 
+  if (params.locality) {
+    filter.where.locality = params.locality;
+  }
+
   if (params.beds) {
     filter.where.beds = parseInt(params.beds);
   }
@@ -30,9 +34,6 @@ export default async function handler(req, res) {
     };
   }
 
-  if (params.locality) {
-    filter.where.locality = params.locality;
-  }
 
   // Get homes by bedrooms
   if (req.method === "GET" && Object.keys(params).length) {

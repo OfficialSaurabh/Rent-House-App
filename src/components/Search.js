@@ -8,7 +8,7 @@ import LocalityDropdown from "./LocalityDropdown";
 import { useState } from "react";
 
 const Search = ({ setFilter }) => {
-  const [bedroom, setBedroom] = useState("");
+  const [bedroom, setBedroom] = useState("1");
   const [price, setPrice] = useState("");
   const [locality, setlocality] = useState("");
 
