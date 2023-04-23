@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     where: {}
   };
 
-  if (params.locality) {
+  if (params.locality && params.locality !== "All Locality") {
     filter.where.locality = params.locality;
   }
 

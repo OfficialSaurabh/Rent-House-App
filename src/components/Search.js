@@ -9,8 +9,8 @@ import { useState } from "react";
 
 const Search = ({ setFilter }) => {
   const [bedroom, setBedroom] = useState("1");
-  const [price, setPrice] = useState("");
-  const [locality, setlocality] = useState("");
+  const [price, setPrice] = useState("All Range");
+  const [locality, setlocality] = useState("All Locality");
 
   const handleClick = () => {
     let min = 0;
