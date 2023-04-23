@@ -40,6 +40,14 @@ To run it in production mode, use:
 npm run build
 npm run start
 ```
+
+Next Auth not working in production build so you haave to downgrade your node version to 16.20.0
+```
+node -v
+v16.20.0
+```
+
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
