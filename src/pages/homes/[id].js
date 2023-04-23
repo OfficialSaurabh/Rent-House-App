@@ -104,11 +104,11 @@ const ListedHome = (home = null) => {
 
   return (
     <Layout>
-      <div className="bg-gray-100 min-h-screen ">
-        <div className="max-w-screen-lg mx-auto p-5 ">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:space-x-4 space-y-4">
+      <div className="min-h-screen bg-gray-100 ">
+        <div className="mx-auto max-w-screen-lg p-5 ">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:space-x-4">
             <div>
-              <h1 className="text-3xl font-semibold truncate text-gray-800 ">
+              <h1 className="truncate text-3xl font-semibold text-gray-800 ">
                 {home?.title ?? ""}
               </h1>
               <p className="text-gray-700">{home?.address ?? ""}</p>
@@ -119,10 +119,10 @@ const ListedHome = (home = null) => {
                   type="button"
                   disabled={deleting}
                   onClick={() => router.push(`/homes/${home.id}/edit`)}
-                  className="px-4 py-1 flex items-center text-lg border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition rounded-md disabled:text-gray-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center rounded-md border border-gray-800 px-4 py-1 text-lg text-gray-800 transition hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:bg-transparent disabled:text-gray-800 disabled:opacity-50"
                 >
                   Edit Home
-                  <span className="text-xl pl-1  text-center">
+                  <span className="pl-1 text-center  text-xl">
                     <BiEditAlt />
                   </span>
                 </button>
@@ -131,17 +131,17 @@ const ListedHome = (home = null) => {
                   type="button"
                   disabled={deleting}
                   onClick={deleteHome}
-                  className=" flex text-center text-lg items-center  rounded-md border border-purple-700 text-purple-800 hover:bg-purple-700 hover:text-white focus:outline-none transition disabled:bg-purple-700 disabled:text-white disabled:opacity-50 disabled:cursor-not-allowed px-4 py-1"
+                  className=" flex items-center rounded-md border  border-purple-700 px-4 py-1 text-center text-lg text-purple-800 transition hover:bg-purple-700 hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:bg-purple-700 disabled:text-white disabled:opacity-50"
                 >
                   {deleting ? "Deleting..." : "Delete"}
-                  <span className="text-xl pl-1  text-center">
+                  <span className="pl-1 text-center  text-xl">
                     <MdDeleteOutline />
                   </span>
                 </button>
               </div>
             ) : null}
           </div>
-          <div className="mt-6 relative aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg shadow-md overflow-hidden">
+          <div className="aspect-h-9 aspect-w-16 relative mt-6 overflow-hidden rounded-lg bg-gray-200 shadow-md">
             {home?.image ? (
               <Image
                 src={home.image}
@@ -151,11 +151,13 @@ const ListedHome = (home = null) => {
               />
             ) : null}
           </div>
-          <div className="grid lg:grid-cols-3 grid-cols-1 py-5  gap-5">
-            <div className="lg:col-span-2 col-span-0 space-y-10 ">
-              <div className=" flex justify-between shadow-sm px-5 py-3 border border-gray-300 rounded-md bg-white ">
+          <div className="grid grid-cols-1 gap-5 py-5  lg:grid-cols-3">
+            <div className="col-span-0 space-y-10 lg:col-span-2 ">
+              <div className=" flex items-center justify-between rounded-md border border-gray-300 bg-white px-5 py-3 shadow-sm ">
                 <div className=" space-y-1 ">
-                  <span className="font-semibold text-gray-500">Bedrooms</span>
+                  <span className="hidden font-semibold text-gray-500 md:block">
+                    Bedrooms
+                  </span>
                   <div className=" flex items-center">
                     <span className="text-xl text-gray-400 ">
                       <BiBed />
@@ -166,7 +168,9 @@ const ListedHome = (home = null) => {
                   </div>
                 </div>
                 <div className=" space-y-1 ">
-                  <span className="font-semibold text-gray-500">Bathrooms</span>
+                  <span className="hidden font-semibold text-gray-500 md:block">
+                    Bathrooms
+                  </span>
                   <div className=" flex items-center">
                     <span className="text-xl text-gray-400 ">
                       <BiBath />
@@ -177,7 +181,9 @@ const ListedHome = (home = null) => {
                   </div>
                 </div>
                 <div className=" space-y-1 ">
-                  <span className="font-semibold text-gray-500">SqFeet</span>
+                  <span className="hidden font-semibold text-gray-500 md:block">
+                    SqFeet
+                  </span>
                   <div className=" flex items-center">
                     <span className="text-xl text-gray-400 ">
                       <BiArea />
@@ -188,7 +194,9 @@ const ListedHome = (home = null) => {
                   </div>
                 </div>
                 <div className=" space-y-1 ">
-                  <span className="font-semibold text-gray-500">Guests</span>
+                  <span className="hidden font-semibold text-gray-500 md:block">
+                    Guests
+                  </span>
                   <div className=" flex items-center">
                     <span className="text-xl text-gray-400 ">
                       <BsPeople />
@@ -200,7 +208,7 @@ const ListedHome = (home = null) => {
                 </div>
               </div>
               <div className="space-y-5">
-                <h1 className="text-2xl text-gray-700 font-bold ">
+                <h1 className="text-2xl font-bold text-gray-700 ">
                   About this house
                 </h1>
                 <p className=" text-lg text-gray-800  ">
@@ -208,9 +216,9 @@ const ListedHome = (home = null) => {
                 </p>
               </div>
             </div>
-            <div className=" bg-white p-5 h-64 rounded-md shadow-md space-y-5 ">
+            <div className=" h-80 space-y-3 rounded-md bg-white p-5 py-10 shadow-md ">
               <div className="">
-                <span className=" text-gray-500 font-semibold ">
+                <span className=" font-semibold text-gray-500 ">
                   Rent Price
                 </span>
                 <p className="mb-2 text-xl font-bold tracking-tight text-purple-700 ">
@@ -224,9 +232,15 @@ const ListedHome = (home = null) => {
                 </p>
               </div>
               <div className="">
-                <span className=" text-gray-500 font-semibold ">Owner</span>
-                <p className="mb-3 font-bold text-gray-700 line-clamp-1   ">
+                <span className=" font-semibold text-gray-500 ">Owner</span>
+                <p className="mb-3 line-clamp-1 font-bold text-gray-700   ">
                   {home.ownerName ?? ""}
+                </p>
+              </div>
+              <div className="">
+                <span className=" font-semibold text-gray-500 ">Posted On</span>
+                <p className="mb-3 line-clamp-1 font-medium text-gray-700   ">
+                  {new Date(home.createdAt).toDateString() ?? ""}
                 </p>
               </div>
               <div className="p-5">
@@ -254,7 +268,7 @@ const ListedHome = (home = null) => {
                       : openModal();
                   }}
                   type="button"
-                  className="px-3 py-2 w-full flex justify-center items-center rounded-md bg-purple-600 hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 text-white transition"
+                  className="flex w-full items-center justify-center rounded-md bg-purple-600 px-3 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
                 >
                   <span className="px-2 ">
                     <BsTelephone />
@@ -265,7 +279,7 @@ const ListedHome = (home = null) => {
             </div>
           </div>
           <div className=" mt-10 ">
-            <p className=" text-2xl text-gray-700 font-bold py-5 ">
+            <p className=" py-5 text-2xl font-bold text-gray-700 ">
               Similar Houses
             </p>
             <CardSwiper />

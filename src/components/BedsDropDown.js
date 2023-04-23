@@ -8,7 +8,7 @@ import { Menu } from "@headlessui/react";
 // import context
 
 const BedsDropDown = () => {
-  const [ bedroom, setBedroom] = useState("");
+  const [bedroom, setBedroom] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Menu as="div" className="dropdown relative  ">
@@ -18,8 +18,14 @@ const BedsDropDown = () => {
       >
         <BiBed className="dropdown-icon-primary" />
         <div>
-          <div className="text-sm text-gray-500 font-medium py-1 "> Bedrooms</div>
-          <div className="sm:text-md text-sm font-medium leading-tight"> {bedroom} </div>
+          <div className="py-1 text-sm font-medium text-gray-500 ">
+            {" "}
+            Bedrooms
+          </div>
+          <div className="sm:text-md text-sm font-medium leading-tight">
+            {" "}
+            {bedroom}{" "}
+          </div>
         </div>
         {isOpen ? (
           <RiArrowUpSLine className="dropdown-icon-secondary" />
@@ -29,7 +35,7 @@ const BedsDropDown = () => {
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu text-center ">
-       <Menu.Item as="li" className="menu-item">
+        <Menu.Item as="li" className="menu-item">
           <button
             onClick={() => {
               setBedroom("1");
@@ -73,7 +79,6 @@ const BedsDropDown = () => {
             4
           </button>
         </Menu.Item>
-
       </Menu.Items>
     </Menu>
   );

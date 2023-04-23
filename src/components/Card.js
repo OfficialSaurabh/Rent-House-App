@@ -5,8 +5,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { BsStars, BsTriangleFill } from "react-icons/bs";
 import { BiBuildingHouse } from "react-icons/bi";
-import {IoLocationOutline} from "react-icons/io5";
-
+import { IoLocationOutline } from "react-icons/io5";
 
 // import { HeartIcon } from '@heroicons/react/solid';
 
@@ -23,27 +22,26 @@ const Card = ({
   favorite = false,
   onClickFavorite = () => null,
 }) => (
-
   <Link href={`/homes/${id}`}>
-    <div className="relative max-w-sm xl:w-80 md:w-full rounded-lg shadow-md hover:shadow-xl bg-white">
+    <div className="relative max-w-sm rounded-lg bg-white shadow-md hover:shadow-xl md:w-full xl:w-80">
       {/* <Image className="rounded-t-lg  " src="/dummyhouse.png" width={369} height={100} alt="" /> */}
-     <div className=" overflow-hidden aspect-w-16 aspect-h-10 ">
-     {image ? (
-        <Image
-          src={image}
-          alt={title}
-          layout="fill"
-          objectFit="cover"
-          className="hover:opacity-80 transition rounded-t-lg  "
-        />
-      ) : 
-      <div className="flex items-center justify-center h-full w-full bg-gray-200 rounded-t-lg">
-        <BiBuildingHouse className="text-4xl text-purple-500" />
+      <div className=" aspect-h-10 aspect-w-16 overflow-hidden ">
+        {image ? (
+          <Image
+            src={image}
+            alt={title}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-t-lg transition hover:opacity-80  "
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center rounded-t-lg bg-gray-200">
+            <BiBuildingHouse className="text-4xl text-purple-500" />
+          </div>
+        )}
       </div>
-      }
-     </div>
 
-      <div className=" absolute  z-10 -mt-5 -ml-3 flex  items-center gap-x-1 rounded-tl-lg rounded-tr-md rounded-br-lg bg-purple-700 py-1 px-7 text-white ">
+      <div className=" absolute  z-10 -ml-3 -mt-5 flex  items-center gap-x-1 rounded-br-lg rounded-tl-lg rounded-tr-md bg-purple-700 px-7 py-1 text-white ">
         {" "}
         <BsStars /> POPULAR
       </div>
@@ -57,32 +55,33 @@ const Card = ({
           <span className=" text-sm font-normal text-gray-500">/month</span>
         </p>
         <button
-         type="button"
-         onClick={e => {
-           e.preventDefault();
-           if (typeof onClickFavorite === 'function') {
-             onClickFavorite(id);
-           }
-         }}
-         className=" flex h-10 w-10 items-center justify-center  rounded-full border border-purple-700 text-xl text-purple-800 ">
+          type="button"
+          onClick={e => {
+            e.preventDefault();
+            if (typeof onClickFavorite === "function") {
+              onClickFavorite(id);
+            }
+          }}
+          className=" flex h-10 w-10 items-center justify-center  rounded-full border border-purple-700 text-xl text-purple-800 "
+        >
           {/* <AiFillHeart className={`w-7 h-7  transition ${
               favorite ? 'text-purple-800' : ' text-purple-300'
             }`}  /> */}
-            {favorite ? (
-              <AiFillHeart className="w-7 h-7  transition text-purple-800" />
-            ) : (
-              <AiOutlineHeart className="w-7 h-7  transition text-purple-700" />
-            )}
+          {favorite ? (
+            <AiFillHeart className="h-7 w-7  text-purple-800 transition" />
+          ) : (
+            <AiOutlineHeart className="h-7 w-7  text-purple-700 transition" />
+          )}
         </button>
       </div>
       <div className="space-y-4  px-5 ">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900  line-clamp-1 ">
+        <h5 className="mb-2 line-clamp-1 text-2xl font-bold tracking-tight  text-gray-900 ">
           {title ?? ""}
         </h5>
       </div>
       <div className="divide-y-2 px-5">
-        <p className="mb-3 flex items-center font-normal text-gray-700 line-clamp-1   ">
-          <IoLocationOutline className="text-xl text-purple-800 font-bold mr-1 " />
+        <p className="mb-3 line-clamp-1 flex items-center font-normal text-gray-700   ">
+          <IoLocationOutline className="mr-1 text-xl font-bold text-purple-800 " />
           {address ?? ""}
         </p>
         <div className="flex flex-wrap justify-between py-3">

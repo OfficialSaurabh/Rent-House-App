@@ -7,12 +7,12 @@ const Create = () => {
   return (
     <Layout>
       <div className="bg-gray-100 p-5">
-        <div className="max-w-screen-sm mx-auto py-2 ">
+        <div className="mx-auto max-w-screen-sm py-2 ">
           <h1 className="text-xl font-medium text-gray-800">List your home</h1>
           <p className="text-gray-500">
             Fill out the form below to list a new home.
           </p>
-          <div className="mt-8 bg-white p-7 shadow-md rounded-md">
+          <div className="mt-8 rounded-md bg-white p-7 shadow-md">
             <ListingForm
               buttonText="Add home"
               redirectPath="/"

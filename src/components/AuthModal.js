@@ -44,16 +44,16 @@ const Confirm = ({ show = false, email = "" }) => (
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <div className="flex items-center justify-center h-full p-8 text-gray-800">
-          <div className="overflow-hidden transition-all transform">
+        <div className="flex h-full items-center justify-center p-8 text-gray-800">
+          <div className="transform overflow-hidden transition-all">
             <h3 className="text-center text-lg font-medium leading-6">
-              <div className="flex flex-col justify-center items-center space-y-4">
-                <HiOutlineMailOpen className="w-12 h-12 shrink-0 text-purple-500" />
+              <div className="flex flex-col items-center justify-center space-y-4">
+                <HiOutlineMailOpen className="h-12 w-12 shrink-0 text-purple-500" />
               </div>
-              <p className="text-2xl font-semibold mt-2">Confirm your email</p>
+              <p className="mt-2 text-2xl font-semibold">Confirm your email</p>
             </h3>
 
-            <p className="text-lg text-center mt-4">
+            <p className="mt-4 text-center text-lg">
               We emailed a magic link to <strong>{email ?? ""}</strong>.
               <br />
               Check your inbox and click the link in the email to login or sign
@@ -166,13 +166,13 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl sm:rounded-md max-w-md relative  ">
+            <div className="relative my-8 inline-block w-full max-w-md transform overflow-hidden bg-white text-left align-middle shadow-xl transition-all sm:rounded-md  ">
               {/* Close icon */}
               <button
                 onClick={closeModal}
-                className="absolute top-2 right-2 shrink-0 p-1 rounded-md hover:bg-gray-100 transition focus:outline-none"
+                className="absolute right-2 top-2 shrink-0 rounded-md p-1 transition hover:bg-gray-100 focus:outline-none"
               >
-                <AiOutlineClose className="w-5 h-5 text-black " />
+                <AiOutlineClose className="h-5 w-5 text-black " />
               </button>
 
               <div className="p-12">
@@ -180,9 +180,9 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                   <div className="flex justify-center">
                     <Link legacyBehavior href="/">
                       <a className="flex items-center space-x-1">
-                        <HiOutlineSparkles className="shrink-0 w-8 h-8 text-purple-800" />
+                        <HiOutlineSparkles className="h-8 w-8 shrink-0 text-purple-800" />
                         <span className="text-xl  font-semibold tracking-wide">
-                          <span className="text-black text-xl font-semibold">
+                          <span className="text-xl font-semibold text-black">
                             Rent
                           </span>
                           <span className="text-purple-800">House</span>
@@ -193,13 +193,13 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
 
                   <Dialog.Title
                     as="h3"
-                    className="mt-6 font-bold text-lg sm:text-2xl text-center text-gray-900 "
+                    className="mt-6 text-center text-lg font-bold text-gray-900 sm:text-2xl "
                   >
                     {showSignIn ? "Welcome back!" : "Create your account"}
                   </Dialog.Title>
 
                   {!showSignIn ? (
-                    <Dialog.Description className="mt-2 text-gray-500 text-base text-center">
+                    <Dialog.Description className="mt-2 text-center text-base text-gray-500">
                       Please create an account to list your homes and bookmark
                       your favorite ones.
                     </Dialog.Description>
@@ -210,7 +210,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                     <button
                       disabled={disabled}
                       onClick={() => signInWithGoogle()}
-                      className="h-[46px] w-full mx-auto border rounded-md p-2 flex justify-center items-center space-x-2 text-gray-500 hover:text-gray-600 hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-400 focus:ring-opacity-25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-gray-500 disabled:hover:bg-transparent disabled:hover:border-gray-200 transition-colors"
+                      className="mx-auto flex h-[46px] w-full items-center justify-center space-x-2 rounded-md border p-2 text-gray-500 transition-colors hover:border-gray-400 hover:bg-gray-50 hover:text-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-400 focus:ring-opacity-25 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-gray-200 disabled:hover:bg-transparent disabled:hover:text-gray-500"
                     >
                       <FcGoogle className=" h-8 w-8 " />
                       <span>Sign {showSignIn ? "in" : "up"} with Google</span>
@@ -236,7 +236,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                           <button
                             type="submit"
                             disabled={disabled || !isValid}
-                            className="mt-6 w-full bg-purple-600 text-white py-2 px-8 rounded-md focus:outline-none focus:ring-4 focus:ring-purple-600 focus:ring-opacity-50 hover:bg-purple-500 transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-purple-600"
+                            className="mt-6 w-full rounded-md bg-purple-600 px-8 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-600 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-purple-600"
                           >
                             {isSubmitting
                               ? "Loading..."
@@ -254,7 +254,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                                     setShowSignIn(false);
                                     resetForm();
                                   }}
-                                  className="underline underline-offset-1 font-semibold text-purple-500 hover:text-purple-600 disabled:hover:text-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                                  className="font-semibold text-purple-500 underline underline-offset-1 hover:text-purple-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:text-purple-500"
                                 >
                                   Sign up
                                 </button>
@@ -270,7 +270,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                                     setShowSignIn(true);
                                     resetForm();
                                   }}
-                                  className="underline underline-offset-1 font-semibold text-purple-500 hover:text-purple-600 disabled:hover:text-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                                  className="font-semibold text-purple-500 underline underline-offset-1 hover:text-purple-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:text-purple-500"
                                 >
                                   Log in
                                 </button>

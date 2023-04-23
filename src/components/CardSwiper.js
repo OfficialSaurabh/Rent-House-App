@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect  } from "react";
+import React, { useRef, useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination, Navigation } from "swiper";
@@ -21,7 +21,7 @@ export default function CardSwiper() {
     axios.get(`/api/get-homes`).then(res => {
       setHomes(res.data);
     });
-  },[]);
+  }, []);
   return (
     <>
       <Swiper
@@ -29,7 +29,7 @@ export default function CardSwiper() {
         navigation={true}
         pagination={{
           clickable: true,
-          dynamicBullets: true
+          dynamicBullets: true,
         }}
         modules={[FreeMode, Pagination, Navigation]}
         className="mySwiper"
