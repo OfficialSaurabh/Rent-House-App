@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import axios from "axios";
+import toast from "react-hot-toast";
 // import { ExclamationIcon } from '@heroicons/react/outline';
 
 const Grid = ({ homes = [] }) => {
@@ -11,7 +11,7 @@ const Grid = ({ homes = [] }) => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get('/api/user/favorites');
+        const { data } = await axios.get("/api/user/favorites");
         setFavorites(data);
       } catch (e) {
         setFavorites([]);
@@ -21,7 +21,7 @@ const Grid = ({ homes = [] }) => {
 
   const toggleFavorite = id => {
     try {
-      toast.dismiss('updateFavorite');
+      toast.dismiss("updateFavorite");
       setFavorites(prev => {
         const isFavorite = prev.find(favoriteId => favoriteId === id);
         // Remove from favorite
@@ -36,13 +36,12 @@ const Grid = ({ homes = [] }) => {
         }
       });
     } catch (e) {
-      toast.error('Unable to update favorite', { id: 'updateFavorite' });
+      toast.error("Unable to update favorite", { id: "updateFavorite" });
     }
   };
 
-
   return isEmpty ? (
-    <p className="text-amber-700 bg-amber-100 px-4 rounded-md py-2 max-w-max inline-flex items-center space-x-1">
+    <p className="inline-flex max-w-max items-center space-x-1 rounded-md bg-amber-100 px-4 py-2 text-amber-700">
       {/* <ExclamationIcon className="shrink-0 w-5 h-5 mt-px" /> */}
       <span>Unfortunately, there is nothing to display yet.</span>
     </p>
@@ -50,10 +49,12 @@ const Grid = ({ homes = [] }) => {
     <>
       <div className="grid gap-4 pt-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-14">
         {homes.map(home => (
-          <Card key={home.id} {...home}
-          onClickFavorite={toggleFavorite}
-          favorite={!!favorites.find(favoriteId => favoriteId === home.id)}
-           />
+          <Card
+            key={home.id}
+            {...home}
+            onClickFavorite={toggleFavorite}
+            favorite={!!favorites.find(favoriteId => favoriteId === home.id)}
+          />
         ))}
       </div>
     </>

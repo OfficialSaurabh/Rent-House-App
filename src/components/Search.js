@@ -17,7 +17,7 @@ const Search = () => {
           {" "}
           Filter houses to rent
         </p>
-        <div className=" flex justify-center md:justify-start gap-5 items-center flex-wrap p-2">
+        <div className=" flex flex-wrap items-center justify-center gap-5 p-2 md:justify-start">
           <div className="">
             <BedsDropDown />
           </div>
@@ -32,7 +32,7 @@ const Search = () => {
               onClick={() => {
                 handleClick();
               }}
-              className="flex p-2 space-x-2 items-center justify-center rounded-lg bg-purple-700 text-lg text-white transition hover:bg-purple-800 "
+              className="flex items-center justify-center space-x-2 rounded-lg bg-purple-700 p-2 text-lg text-white transition hover:bg-purple-800 "
             >
               <p className="">Search</p>
               <RiSearch2Line />

@@ -8,7 +8,7 @@ import { Menu } from "@headlessui/react";
 // import context
 
 const LocalityDropdown = () => {
-  const [ locality, setlocality] = useState("");
+  const [locality, setlocality] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Menu as="div" className="dropdown relative  ">
@@ -18,8 +18,14 @@ const LocalityDropdown = () => {
       >
         <CiLocationOn className="dropdown-icon-primary" />
         <div>
-          <div className="text-sm text-gray-500 font-medium py-1 "> Locality</div>
-          <div className="sm:text-md text-sm font-medium leading-tight"> {locality} </div>
+          <div className="py-1 text-sm font-medium text-gray-500 ">
+            {" "}
+            Locality
+          </div>
+          <div className="sm:text-md text-sm font-medium leading-tight">
+            {" "}
+            {locality}{" "}
+          </div>
         </div>
         {isOpen ? (
           <RiArrowUpSLine className="dropdown-icon-secondary" />
@@ -29,10 +35,10 @@ const LocalityDropdown = () => {
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu text-center ">
-       <Menu.Item as="li" className="menu-item">
+        <Menu.Item as="li" className="menu-item">
           <button
             onClick={() => {
-              setlocality("1");
+              setlocality("Bidhannagar");
               setIsOpen(false);
             }}
             className="menu-item-btn"
@@ -43,7 +49,7 @@ const LocalityDropdown = () => {
         <Menu.Item as="li" className="menu-item">
           <button
             onClick={() => {
-              setlocality("2");
+              setlocality("Pump House");
               setIsOpen(false);
             }}
             className="menu-item-btn"
@@ -54,7 +60,7 @@ const LocalityDropdown = () => {
         <Menu.Item as="li" className="menu-item">
           <button
             onClick={() => {
-              setlocality("3");
+              setlocality("Station Road");
               setIsOpen(false);
             }}
             className="menu-item-btn"
@@ -65,7 +71,7 @@ const LocalityDropdown = () => {
         <Menu.Item as="li" className="menu-item">
           <button
             onClick={() => {
-              setlocality("4");
+              setlocality("Stell Park");
               setIsOpen(false);
             }}
             className="menu-item-btn"
@@ -73,7 +79,6 @@ const LocalityDropdown = () => {
             Stell Park
           </button>
         </Menu.Item>
-
       </Menu.Items>
     </Menu>
   );

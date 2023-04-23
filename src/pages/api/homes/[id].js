@@ -50,8 +50,12 @@ export default async function handler(req, res) {
         where: { id },
       });
       if (home.image) {
-        const path = home.image.split(`${process.env.NEXT_PUBLIC_SUPABASE_BUCKET}/`)?.[1];
-        await supabase.storage.from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET).remove([path]);
+        const path = home.image.split(
+          `${process.env.NEXT_PUBLIC_SUPABASE_BUCKET}/`
+        )?.[1];
+        await supabase.storage
+          .from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET)
+          .remove([path]);
       }
       res.status(200).json(home);
     } catch (e) {
