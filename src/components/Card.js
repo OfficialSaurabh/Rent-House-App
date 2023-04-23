@@ -5,6 +5,8 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { BsStars, BsTriangleFill } from "react-icons/bs";
 import { BiBuildingHouse } from "react-icons/bi";
+import {IoLocationOutline} from "react-icons/io5";
+
 
 // import { HeartIcon } from '@heroicons/react/solid';
 
@@ -79,7 +81,8 @@ const Card = ({
         </h5>
       </div>
       <div className="divide-y-2 px-5">
-        <p className="mb-3 font-normal text-gray-700 line-clamp-1   ">
+        <p className="mb-3 flex items-center font-normal text-gray-700 line-clamp-1   ">
+          <IoLocationOutline className="text-xl text-purple-800 font-bold mr-1 " />
           {address ?? ""}
         </p>
         <div className="flex flex-wrap justify-between py-3">

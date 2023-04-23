@@ -1,4 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
+import Logo from "../../public/logo.png";
+
 import { BiBuildingHouse} from "react-icons/bi";
 
 function Foot() {
@@ -11,12 +14,13 @@ function Foot() {
           href="/"
           className="mb-4 flex items-center sm:mb-0"
         >
-          {/* <img
-            src="/logo.png"
-            className="mr-3 h-8"
-            alt=" Logo"
-          /> */}
-          < BiBuildingHouse className="h-8 w-8 mr-3  text-purple-800" />
+           <Image
+                  src={Logo}
+                  alt="RentHouse"
+                  width={50}
+                  height={50}
+                  className="rounded-full mr-2"
+                />
           <span className="self-center whitespace-nowrap text-2xl font-semibold  text-purple-800 ">
             RentHouse
           </span>

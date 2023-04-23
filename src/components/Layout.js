@@ -8,15 +8,7 @@ import { useSession, signOut } from "next-auth/react";
 import AuthModal from "./AuthModal";
 import { Menu, Transition } from "@headlessui/react";
 import Footer from "./Footer";
-// import {
-//   AiOutlineHeart,
-//   AiOutlineHome,
-//   AiOutlineLogout,
-//   AiOutlinePlus,
-//   HiOutlineSparkles,
-//   AiOutlineUser,
-// } from "@heroicons/react/outline";
-// import { HiOutlineChevronDown } from "@heroicons/react/solid";
+import Logo from "../../public/logo.png";
 import {
   AiOutlineHeart,
   AiOutlineHome,
@@ -78,12 +70,21 @@ const Layout = ({ children = null }) => {
           <div className="h-full container mx-auto  lg:max-w-7xl">
             <div className="h-full px-4 flex justify-between items-center space-x-4">
               <Link legacyBehavior href="/">
-                <a className="flex items-center space-x-1">
-                  <BiBuildingHouse className="shrink-0 w-8 h-8 text-purple-800" />
-                  <span className="text-xl font-semibold tracking-wide text-purple-800">
+                
+                <p className="flex items-center  space-x-1">
+                <Image
+                  src={Logo}
+                  alt="RentHouse"
+                  width={50}
+                  height={50}
+                  className="rounded-full"
+                />
+
+                  {/* <BiBuildingHouse className="shrink-0 w-8 h-8 text-purple-800" /> */}
+                  <span className="text-2xl font-semibold tracking-wide text-purple-800">
                     RentHouse
                   </span>
-                </a>
+                </p>
               </Link>
               <div className="flex items-center space-x-4">
                 <button
