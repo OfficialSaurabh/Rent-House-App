@@ -23,8 +23,8 @@ export default async function handler(req, res) {
     filter.where.locality = params.locality;
   }
 
-  if (params.beds) {
-    filter.where.beds = parseInt(params.beds);
+  if (params.beds && params.beds !== 'NaN') {
+    filter.where.beds = parseInt(params.beds)  ;
   }
 
   if (params.lowerprice && params.upperprice) {
