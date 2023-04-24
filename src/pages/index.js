@@ -23,9 +23,15 @@ export default function Home() {
   // loading state
   const [loading, setLoading] = useState(true);
   // filter state
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({
+    beds: "",
+    upperprice: "",
+    lowerprice: "",
+    locality: "",
+  });
   useEffect(() => {
-    axios.get(`/api/get-homes?${filter}`).then(res => {
+    console.log(filter);
+    axios.get(`/api/get-homes?beds=${filter.beds}&lowerprice=${filter.lowerprice}&&upperprice=${filter.upperprice}&locality=${filter.locality}`).then(res => {
       setHomes(res.data);
       setLoading(false);
     });
@@ -59,7 +65,7 @@ export default function Home() {
             <p className="text-gray-500">
               Explore some of the best places in the world
             </p>
-            <Search />
+            <Search setFilter={setFilter} />
             <div className="flex justify-center lg:flex-none  ">
               <Grid homes={homes} />
             </div>
