@@ -40,11 +40,11 @@ export default function Home() {
   if (loading) {
     return (
       <Layout>
-        <div className="bg-gray-100 min-h-screen ">
-          <div className="max-w-screen-lg mx-auto p-5 ">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:space-x-4 space-y-4">
+        <div className="min-h-screen bg-gray-100 ">
+          <div className="mx-auto max-w-screen-lg p-5 ">
+            <div className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:space-x-4">
               <div>
-                <h1 className="text-2xl font-semibold truncate text-gray-800 ">
+                <h1 className="truncate text-2xl font-semibold text-gray-800 ">
                   Loading...
                 </h1>
               </div>
@@ -57,9 +57,9 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <section className="bg-gray-100 min-h-screen ">
+        <section className="min-h-screen bg-gray-100 ">
           <div className="mx-auto w-3/4 border border-none py-10">
-            <h1 className="font-medium text-gray-800 sm:text-4xl text-2xl">
+            <h1 className="text-2xl font-medium text-gray-800 sm:text-4xl">
               Top-rated places to stay
             </h1>
             <p className="text-gray-500">

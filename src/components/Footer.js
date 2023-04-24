@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { BiBuildingHouse} from "react-icons/bi";
+import Image from "next/image";
+import Logo from "../../public/logo.png";
+
+import { BiBuildingHouse } from "react-icons/bi";
 
 function Foot() {
   const today = new Date();
@@ -7,16 +10,14 @@ function Foot() {
   return (
     <footer className="bg-white p-4   md:px-6 md:py-8 ">
       <div className="sm:flex sm:items-center sm:justify-between">
-        <Link
-          href="/"
-          className="mb-4 flex items-center sm:mb-0"
-        >
-          {/* <img
-            src="/logo.png"
-            className="mr-3 h-8"
-            alt=" Logo"
-          /> */}
-          < BiBuildingHouse className="h-8 w-8 mr-3  text-purple-800" />
+        <Link href="/" className="mb-4 flex items-center sm:mb-0">
+          <Image
+            src={Logo}
+            alt="RentHouse"
+            width={50}
+            height={50}
+            className="mr-2 rounded-full"
+          />
           <span className="self-center whitespace-nowrap text-2xl font-semibold  text-purple-800 ">
             RentHouse
           </span>

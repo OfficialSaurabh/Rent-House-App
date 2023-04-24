@@ -9,6 +9,7 @@ import axios from "axios";
 // import context
 
 const LocalityDropdown = ({ locality, setlocality }) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const [localities, setLocalities] = useState([]);
 
@@ -28,8 +29,14 @@ const LocalityDropdown = ({ locality, setlocality }) => {
       >
         <CiLocationOn className="dropdown-icon-primary" />
         <div>
-          <div className="text-sm text-gray-500 font-medium py-1 "> Locality</div>
-          <div className="sm:text-md text-sm font-medium leading-tight"> {locality} </div>
+          <div className="py-1 text-sm font-medium text-gray-500 ">
+            {" "}
+            Locality
+          </div>
+          <div className="sm:text-md text-sm font-medium leading-tight">
+            {" "}
+            {locality}{" "}
+          </div>
         </div>
         {isOpen ? (
           <RiArrowDownSLine className="dropdown-icon-secondary" />
@@ -54,6 +61,7 @@ const LocalityDropdown = ({ locality, setlocality }) => {
             </Menu.Item>
           ))
         }
+
       </Menu.Items>
     </Menu>
   );

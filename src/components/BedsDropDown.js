@@ -7,6 +7,7 @@ import { BiBed } from "react-icons/bi";
 import { Menu } from "@headlessui/react";
 // import context
 
+
 const BedsDropDown = ({ bedroom, setBedroom }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -17,8 +18,14 @@ const BedsDropDown = ({ bedroom, setBedroom }) => {
       >
         <BiBed className="dropdown-icon-primary" />
         <div>
-          <div className="text-sm text-gray-500 font-medium py-1 "> Bedrooms</div>
-          <div className="sm:text-md text-sm font-medium leading-tight"> {bedroom} </div>
+          <div className="py-1 text-sm font-medium text-gray-500 ">
+            {" "}
+            Bedrooms
+          </div>
+          <div className="sm:text-md text-sm font-medium leading-tight">
+            {" "}
+            {bedroom}{" "}
+          </div>
         </div>
         {isOpen ? (
           <RiArrowUpSLine className="dropdown-icon-secondary" />
@@ -72,7 +79,6 @@ const BedsDropDown = ({ bedroom, setBedroom }) => {
             4
           </button>
         </Menu.Item>
-
       </Menu.Items>
     </Menu>
   );

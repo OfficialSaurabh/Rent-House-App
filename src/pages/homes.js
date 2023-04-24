@@ -34,7 +34,7 @@ export async function getServerSideProps(context) {
 const Homes = ({ homes = [] }) => {
   return (
     <Layout>
-      <section className="bg-gray-100 min-h-screen ">
+      <section className="min-h-screen bg-gray-100 ">
         <div className="mx-auto w-3/4 border border-none py-10">
           <h1 className="text-xl font-medium text-gray-800">Your listings</h1>
           <p className="text-gray-500">
