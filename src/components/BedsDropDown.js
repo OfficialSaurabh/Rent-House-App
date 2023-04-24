@@ -7,8 +7,8 @@ import { BiBed } from "react-icons/bi";
 import { Menu } from "@headlessui/react";
 // import context
 
-const BedsDropDown = () => {
-  const [bedroom, setBedroom] = useState("");
+
+const BedsDropDown = ({ bedroom, setBedroom }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Menu as="div" className="dropdown relative  ">
