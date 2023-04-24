@@ -35,6 +35,17 @@ const BedsDropDown = ({ bedroom, setBedroom }) => {
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu text-center ">
+      <Menu.Item as="li" className="menu-item">
+          <button
+            onClick={() => {
+              setBedroom("All Types");
+              setIsOpen(false);
+            }}
+            className="menu-item-btn"
+          >
+            All Types
+          </button>
+        </Menu.Item>
         <Menu.Item as="li" className="menu-item">
           <button
             onClick={() => {
