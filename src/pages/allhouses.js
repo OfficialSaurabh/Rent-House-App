@@ -1,3 +1,15 @@
+// import Image from 'next/image'
+// import { Inter } from 'next/font/google'
+
+// const inter = Inter({ subsets: ['latin'] })
+
+// export default function Home() {
+//   return (
+//     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+//       <h1>Rent House</h1>
+//     </main>
+//   )
+// }
 
 import Layout from "../components/Layout";
 import Grid from "../components/Grid";
@@ -5,17 +17,21 @@ import Search from "../components/Search";
 import CardSwiper from "../components/CardSwiper";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-
 
 export default function Home() {
   const [homes, setHomes] = useState([]);
   // loading state
   const [loading, setLoading] = useState(true);
   // filter state
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({
+    beds: "",
+    upperprice: "",
+    lowerprice: "",
+    locality: "",
+  });
   useEffect(() => {
-    axios.get(`/api/get-homes?${filter}`).then(res => {
+    console.log(filter);
+    axios.get(`/api/get-homes?beds=${filter.beds}&lowerprice=${filter.lowerprice}&&upperprice=${filter.upperprice}&locality=${filter.locality}`).then(res => {
       setHomes(res.data);
       setLoading(false);
     });
@@ -49,7 +65,7 @@ export default function Home() {
             <p className="text-gray-500">
               Explore some of the best places in the world
             </p>
-            <Search />
+            <Search setFilter={setFilter} />
             <div className="flex justify-center lg:flex-none  ">
               <Grid homes={homes} />
             </div>
