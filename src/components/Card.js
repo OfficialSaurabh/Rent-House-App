@@ -75,15 +75,16 @@ const Card = ({
         </button>
       </div>
       <div className="space-y-4  px-5 ">
-        <h5 className="mb-2 line-clamp-1 text-2xl font-bold tracking-tight  text-gray-900 ">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900  line-clamp-1 ">
           {title ?? ""}
         </h5>
       </div>
       <div className="divide-y-2 px-5">
-        <p className="mb-3 line-clamp-1 flex items-center font-normal text-gray-700   ">
-          <IoLocationOutline className="mr-1 text-xl font-bold text-purple-800 " />
+        <p className="mb-3 font-normal text-gray-700 line-clamp-1   ">
+          {/* <IoLocationOutline className="mr-1 text-xl font-bold text-purple-800 " /> */}
           {address ?? ""}
         </p>
+
         <div className="flex flex-wrap justify-between py-3">
           <p className="flex items-center py-2   ">
             <span className=" text-purple-800 ">

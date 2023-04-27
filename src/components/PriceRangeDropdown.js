@@ -8,8 +8,9 @@ import {
 import { Menu } from "@headlessui/react";
 // import context
 
-const PriceRangeDropdown = () => {
-  const [price, setPrice] = useState();
+
+const PriceRangeDropdown = ({price, setPrice}) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const prices = [
     {

@@ -7,8 +7,8 @@ import { BiBed } from "react-icons/bi";
 import { Menu } from "@headlessui/react";
 // import context
 
-const BedsDropDown = () => {
-  const [bedroom, setBedroom] = useState("");
+
+const BedsDropDown = ({ bedroom, setBedroom }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Menu as="div" className="dropdown relative  ">
@@ -35,6 +35,17 @@ const BedsDropDown = () => {
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu text-center ">
+      <Menu.Item as="li" className="menu-item">
+          <button
+            onClick={() => {
+              setBedroom("All Types");
+              setIsOpen(false);
+            }}
+            className="menu-item-btn"
+          >
+            All Types
+          </button>
+        </Menu.Item>
         <Menu.Item as="li" className="menu-item">
           <button
             onClick={() => {

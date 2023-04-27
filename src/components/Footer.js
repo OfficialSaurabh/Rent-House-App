@@ -26,7 +26,7 @@ function Foot() {
           <li>
             <Link
               href="/"
-              className="mr-4 hover:text-purple-700 md:mr-6 "
+              className="mr-4 line-clamp-1 hover:text-purple-700 md:mr-6 "
               rel="noreferrer"
             >
               About
