@@ -10,7 +10,6 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import Link from "next/link";
 
-BiSearchAlt;
 
 const Landing = () => {
   return (
@@ -25,6 +24,7 @@ const Landing = () => {
               Find a variety of properties that suit you very easy, <br></br>
               Forget all difficulties in finding a residence for you
             </p>
+
           </div>
           <div className="  ">
             <Image
@@ -50,6 +50,10 @@ const Landing = () => {
                   View All
                 </button>
               </Link>
+
+            <Search setFilter={setFilter} />
+            <div className="flex justify-center lg:flex-none  ">
+              <Grid homes={homes} />
             </div>
             <CardSwiper />
           </div>
