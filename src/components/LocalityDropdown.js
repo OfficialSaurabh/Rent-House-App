@@ -9,14 +9,15 @@ import axios from "axios";
 // import context
 
 const LocalityDropdown = ({ locality, setlocality }) => {
-
   const [isOpen, setIsOpen] = useState(false);
   const [localities, setLocalities] = useState([]);
 
   useEffect(() => {
     axios.get("/api/localities").then(res => {
       // get unique localities
-      const uniqueLocalities = [...new Set(res.data.map(home => home.locality))];
+      const uniqueLocalities = [
+        ...new Set(res.data.map(home => home.locality)),
+      ];
       setLocalities(uniqueLocalities);
     });
   }, []);
@@ -45,23 +46,31 @@ const LocalityDropdown = ({ locality, setlocality }) => {
         )}
       </Menu.Button>
 
-      <Menu.Items className="dropdown-menu text-center ">
-        {
-          localities.map((locality) => (
-            <Menu.Item as="li" className="menu-item" key={locality}>
-              <button
-                onClick={() => {
-                  setlocality(locality);
-                  setIsOpen(false);
-                }}
-                className="menu-item-btn"
-              >
-                {locality}
-              </button>
-            </Menu.Item>
-          ))
-        }
-
+      <Menu.Items className="dropdown-menu text-start ">
+        <Menu.Item as="li" className="menu-item">
+          <button
+            onClick={() => {
+              setlocality("All Locality");
+              setIsOpen(false);
+            }}
+            className="menu-item-btn "
+          >
+            All Locality
+          </button>
+        </Menu.Item>
+        {localities.map(locality => (
+          <Menu.Item as="li" className="menu-item" key={locality}>
+            <button
+              onClick={() => {
+                setlocality(locality);
+                setIsOpen(false);
+              }}
+              className="menu-item-btn "
+            >
+              {locality}
+            </button>
+          </Menu.Item>
+        ))}
       </Menu.Items>
     </Menu>
   );
