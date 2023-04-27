@@ -13,49 +13,39 @@ export default function Faq() {
           >
             <div className="w-full px-4 py-2 ">
               <details className="mb-4">
-                <summary className="rounded-md  bg-purple-100 px-5 py-5 font-semibold">
-                  Who can become a member ?
+                <summary className="rounded-md text-purple-700 outline outline-1 outline-purple-400 hover:bg-purple-200 px-5 py-5 font-semibold">
+                How do I find rental properties on the website?
                 </summary>
 
                 <p className="pl-4 pt-4 text-left  ">
-                  There is not any membership criteria! Anyone who is willing to
-                  learn and develop their skills in the field of programming can
-                  become a member.
+                You can search for rental properties on our website by using our search bar or filtering options. You can filter by location, price range, number of bedrooms, and other amenities.
                 </p>
               </details>
               <details className="mb-4">
-                <summary className="rounded-md bg-purple-100 px-4 py-5 font-semibold">
-                  What should I carry when attending a workshop ?
+                <summary className="rounded-md text-purple-700 outline outline-1 outline-purple-400 hover:bg-purple-200 px-4 py-5 font-semibold">
+                How do I list my property on Rent House?
                 </summary>
 
                 <p className="pl-4 pt-4 text-left antialiased ">
-                  We recommend you to carry with you a notebook, pen and laptop
-                  because more often than not we get our hands dirty with code.
-                  Most importantly, bring along a healthy dose of curiosity and
-                  enthusiam.
+                Each rental property may have different application procedures, but typically you can apply by filling out an online application and submitting it along with any required documentation such as proof of income and a background check.
                 </p>
               </details>
               <details className="mb-4">
-                <summary className="rounded-md  bg-purple-100 px-5 py-5 font-semibold">
-                  How frequently do events and workshops occur ?
+                <summary className="rounded-md  text-purple-700 outline outline-1 outline-purple-400 hover:bg-purple-200 px-5 py-5 font-semibold">
+                What fees do I need to pay to rent a property?
                 </summary>
 
                 <p className="pl-4 pt-4 text-left antialiased ">
-                  We organize a lot of events and workshops throughout the year,
-                  from programming bootcamps to various contests and speaker
-                  sessions.
+                Rental fees vary depending on the property and location. Typically, you will need to pay a security deposit, first and last month&apos;s rent, and any application fees.
                 </p>
               </details>
               <details className="mb-4">
-                <summary className="rounded-md  bg-purple-100 px-5 py-5 font-semibold">
-                  Who should I reach out to if I have any questions ?
+                <summary className="rounded-md  text-purple-700 outline outline-1 outline-purple-400 hover:bg-purple-200 px-5 py-5 font-semibold">
+                How do I contact the property owner?
                 </summary>
 
                 <p className="pl-4 pt-4 text-left antialiased ">
-                  We have an extended management system. You can always reach
-                  out to us anytime through our Social media platforms. Despite
-                  this, Discord is our first priority. We would love to handle
-                  queries and see your comments and suggestions there.
+                You can contact the property owner or manager by filling out the contact form on the listing page or by using the phone number or email address provided in the listing. Some listings may also offer a live chat option or a scheduling tool to set up a viewing or appointment.
                 </p>
               </details>
             </div>
