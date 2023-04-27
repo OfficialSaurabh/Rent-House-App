@@ -11,6 +11,7 @@ export default async function handler(req, res) {
         where: { id },
         select: { owner: true },
       });
+      // console.log(owner.id);
       res.status(200).json(owner);
     } catch (e) {
       res.status(500).json({ message: "Something went wrong" });

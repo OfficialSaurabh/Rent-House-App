@@ -105,32 +105,43 @@ const Card = ({
             {address ?? ""}
           </p>
 
-          <div className="flex flex-wrap justify-between py-3">
-            <p className="flex items-center py-2   ">
-              <span className=" text-purple-800 ">
-                <BiBed />
-              </span>
-              <span className="px-1 text-sm text-gray-700">
-                {beds ?? 0} Beds
-              </span>
-            </p>
-            <p className="flex items-center   ">
-              <span className=" text-purple-800 ">
-                <BiBath />
-              </span>
-              <span className="px-1 text-sm text-gray-700">
-                {baths ?? 0} Bathrooms
-              </span>
-            </p>
-            <p className=" flex items-center   ">
-              <span className=" text-purple-800 ">
-                <BiArea />
-              </span>
-              <span className="px-1 text-sm text-gray-700">
-                {" "}
-                {sqfeet ?? 0} Sqfeet
-              </span>
-            </p>
+          <div className="">
+            <div className=" flex flex-wrap justify-between py-3">
+              <p className="flex items-center py-2   ">
+                <span className="text-xl text-purple-800  sm:text-base ">
+                  <BiBed />
+                </span>
+                <span className="px-1 text-lg text-gray-700 sm:text-sm">
+                  {beds ?? 0}
+                </span>
+                <span className="hidden text-sm text-gray-700 sm:block ">
+                  Beds
+                </span>
+              </p>
+              <p className="flex items-center   ">
+                <span className=" text-xl text-purple-800  sm:text-base ">
+                  <BiBath />
+                </span>
+                <span className="px-1 text-lg text-gray-700 sm:text-sm">
+                  {baths ?? 0} 
+                </span>
+                <span className="hidden text-sm text-gray-700 sm:block ">
+                Bathrooms
+                </span>
+              </p>
+              <p className=" flex items-center   ">
+                <span className=" text-xl text-purple-800  sm:text-base ">
+                  <BiArea />
+                </span>
+                <span className="px-1 text-lg text-gray-700 sm:text-sm">
+                  {" "}
+                  {sqfeet ?? 0} 
+                </span>
+                <span className="hidden text-sm text-gray-700 sm:block ">
+                Sqfeet
+                </span>
+              </p>
+            </div>
           </div>
         </div>
         <AuthModal show={showModal} onClose={closeModal} />
