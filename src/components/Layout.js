@@ -60,9 +60,7 @@ const Layout = ({ children = null }) => {
         <title>RentHouse</title>
         <meta
           name="title"
-          content="The goal of our website is to streamline the rental process
-          for both landlords and tenants, making it easier and more
-          efficient to find and manage rental properties."
+          content="Learn how to Build a Fullstack App with Next.js, PlanetScale & Prisma | The Modern Dev"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -88,7 +86,6 @@ const Layout = ({ children = null }) => {
                 </p>
               </Link>
               <div className="flex items-center space-x-4">
-                
                 <button
                   onClick={() => {
                     session?.user ? router.push("/create") : openModal();

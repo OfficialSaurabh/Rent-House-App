@@ -237,9 +237,9 @@ const ListedHome = (home = null) => {
                   {home.ownerName ?? ""}
                 </p>
               </div>
-              <div className="space-y-2 w-36 ">
+              <div className="">
                 <span className=" font-semibold text-gray-500 ">Posted On</span>
-                <p className="mb-3 line-clamp-1 font-medium rounded-md text-purple-700 outline outline-1 bg-purple-200 p-1 outline-purple-400  ">
+                <p className="mb-3 line-clamp-1 font-medium text-gray-700   ">
                   {new Date(home.createdAt).toDateString() ?? ""}
                 </p>
               </div>
