@@ -54,20 +54,22 @@ export async function getStaticProps({ params }) {
 const ListedHome = (home = null) => {
   const { data: session } = useSession();
   const [isOwner, setIsOwner] = useState(false);
+  // console.log(isOwner);
   useEffect(() => {
     (async () => {
       if (session?.user) {
         try {
           const owner = await axios.get(`/api/homes/${home.id}/owner`);
-          setIsOwner(owner?.id === session.user.id);
+          setIsOwner(owner.data.email === session.user.email);
+          // console.log(session.user.email);
         } catch (e) {
           setIsOwner(false);
         }
       }
     })();
-  }, [session?.user]);
+  }, [session?.user, home.id]);
 
-  const user = session?.user;
+  // const user = session?.user;
   // const isLoadingUser = status === "loading";
 
   const [showModal, setShowModal] = useState(false);
@@ -239,7 +241,7 @@ const ListedHome = (home = null) => {
               </div>
               <div className="space-y-2">
                 <span className=" font-semibold text-gray-500 ">Posted On</span>
-                <p className="mb-3 line-clamp-1 rounded-md w-36 bg-purple-200 p-1 font-medium text-purple-700 outline outline-1 outline-purple-400  ">
+                <p className="mb-3 line-clamp-1 w-36 rounded-md bg-purple-200 p-1 font-medium text-purple-700 outline outline-1 outline-purple-400  ">
                   {new Date(home.createdAt).toDateString() ?? ""}
                 </p>
               </div>
