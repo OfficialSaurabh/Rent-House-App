@@ -70,7 +70,7 @@ const Layout = ({ children = null }) => {
           <div className="container mx-auto h-full  lg:max-w-7xl">
             <div className="flex h-full items-center justify-between space-x-4 px-4">
               <Link legacyBehavior href="/">
-                <p className="flex items-center  space-x-1">
+                <p className="flex items-center cursor-pointer  space-x-1">
                   <Image
                     src={Logo}
                     alt="RentHouse"
@@ -80,7 +80,7 @@ const Layout = ({ children = null }) => {
                   />
 
                   {/* <BiBuildingHouse className="shrink-0 w-8 h-8 text-purple-800" /> */}
-                  <span className="text-2xl font-semibold tracking-wide text-purple-800">
+                  <span className="text-2xl cursor-pointer font-semibold tracking-wide text-purple-800">
                     RentHouse
                   </span>
                 </p>
