@@ -38,7 +38,7 @@ function Foot() {
               className="mr-4 hover:text-purple-700 md:mr-6"
               rel="noreferrer"
             >
-              Privacy Policy
+              Privacy policy
             </Link>
           </li>
           <li>
@@ -47,7 +47,7 @@ function Foot() {
               className="mr-4 hover:text-purple-700 md:mr-6 "
               rel="noreferrer"
             >
-              Licensing
+              License
             </Link>
           </li>
           <li>
