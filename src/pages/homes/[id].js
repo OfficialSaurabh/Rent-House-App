@@ -72,6 +72,18 @@ const ListedHome = (home = null) => {
   // const user = session?.user;
   // const isLoadingUser = status === "loading";
 
+  // Show onwer contact info
+  const [showOnwer, setShowOwner] = useState(false);
+  useEffect(() => {
+    (async () => {
+      try {
+        setShowOwner(true);
+      } catch (e) {
+        setShowOwner(false);
+      }
+    })();
+  }, [home.id]);
+
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(true);
@@ -218,7 +230,7 @@ const ListedHome = (home = null) => {
                 </p>
               </div>
             </div>
-            <div className=" h-80 space-y-3 rounded-md bg-white p-5 py-10 shadow-md ">
+            <div className="lg:h-96 h-80 lg:space-y-5 space-y-3 rounded-md bg-white p-5 py-10 shadow-md ">
               <div className="">
                 <span className=" font-semibold text-gray-500 ">
                   Rent Price
@@ -245,24 +257,28 @@ const ListedHome = (home = null) => {
                   {new Date(home.createdAt).toDateString() ?? ""}
                 </p>
               </div>
-              <div className="p-5">
-                {/* <button
+              {/* Dextop View Show owner contact */}
+              <div className="hidden space-y-2 p-5 text-center lg:block  ">
+                <Link href="tel:${showOnwer}" className=" ">
+                  {showOnwer}
+                </Link>
+                <button
+                  onClick={() => {
+                    session?.user
+                      ? setShowOwner(`${home.contact}`)
+                      : openModal();
+                  }}
                   type="button"
-                  className=" rounded-md  px-3 py-2 text-center text-purple-700 outline outline-1 outline-purple-400 hover:bg-purple-200"
+                  className="flex w-full items-center justify-center rounded-md bg-purple-600 px-3 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
                 >
-                  Add to Favorites
-                </button> */}
-                {/* <a href={`tel:${home.contact}`} className="">
-                  <button
-                    type="button"
-                    className="px-3 py-2 w-full flex justify-center items-center rounded-md bg-purple-600 hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 text-white transition"
-                  >
-                    <span className="px-2 ">
-                      <BsTelephone />
-                    </span>
-                    Contact Owner
-                  </button>
-                </a> */}
+                  <span className="px-2 ">
+                    <BsTelephone />
+                  </span>
+                  Show Contact
+                </button>
+              </div>
+              {/* Mobile view Contact onwer button */}
+              <div className=" block p-5 lg:hidden ">
                 <button
                   onClick={() => {
                     session?.user
