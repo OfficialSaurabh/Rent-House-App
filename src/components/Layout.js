@@ -64,8 +64,8 @@ const Layout = ({ children = null }) => {
       <Head>
         <title>RentHouse</title>
         <meta
-          name="title"
-          content="Learn how to Build a Fullstack App with Next.js, PlanetScale & Prisma | The Modern Dev"
+          name="The Rent House web app"
+          content="Find your next home with ease on our Rent House web app. Browse thousands of listings, from cozy apartments to spacious houses, and discover the perfect match for your lifestyle and budget. With powerful search filters, detailed property descriptions, and high-quality photos, you can quickly narrow down your options and find the home of your dreams. Our platform offers  easy communication with landlords, so you can rent with confidence. Start your search today and discover a new level of convenience in Rent House!"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
