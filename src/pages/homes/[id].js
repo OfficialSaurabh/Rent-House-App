@@ -13,6 +13,7 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import CardSwiper from "../../components/CardSwiper";
 import AuthModal from "../../components/AuthModal";
+import ShareButton from "../../components/ShareButton";
 
 // Instantiate Prisma Client
 const prisma = new PrismaClient();
@@ -127,6 +128,7 @@ const ListedHome = (home = null) => {
               </h1>
               <p className="text-gray-700">{home?.address ?? ""}</p>
             </div>
+            <div className="flex space-x-2 items-center ">
             {isOwner ? (
               <div className="flex items-center space-x-2">
                 <button
@@ -135,7 +137,7 @@ const ListedHome = (home = null) => {
                   onClick={() => router.push(`/homes/${home.id}/edit`)}
                   className="flex items-center rounded-md border border-gray-800 px-4 py-1 text-lg text-gray-800 transition hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:bg-transparent disabled:text-gray-800 disabled:opacity-50"
                 >
-                  Edit Home
+                  Edit 
                   <span className="pl-1 text-center  text-xl">
                     <BiEditAlt />
                   </span>
@@ -145,7 +147,7 @@ const ListedHome = (home = null) => {
                   type="button"
                   disabled={deleting}
                   onClick={deleteHome}
-                  className=" flex items-center rounded-md border  border-purple-700 px-4 py-1 text-center text-lg text-purple-800 transition hover:bg-purple-700 hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:bg-purple-700 disabled:text-white disabled:opacity-50"
+                  className=" flex items-center rounded-md border  border-red-700 px-4 py-1 text-center text-lg text-red-700 transition hover:bg-red-700 hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:bg-purple-700 disabled:text-white disabled:opacity-50"
                 >
                   {deleting ? "Deleting..." : "Delete"}
                   <span className="pl-1 text-center  text-xl">
@@ -154,6 +156,8 @@ const ListedHome = (home = null) => {
                 </button>
               </div>
             ) : null}
+            <ShareButton id={home.id} />
+            </div>
           </div>
           <div className="aspect-h-9 aspect-w-16 relative mt-6 overflow-hidden rounded-lg bg-gray-200 shadow-md">
             {home?.image ? (
