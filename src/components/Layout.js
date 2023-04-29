@@ -26,6 +26,11 @@ const menuItems = [
     href: "/create",
   },
   {
+    label: "All Listings",
+    icon: BiBuildingHouse,
+    href: "/allhouses",
+  },
+  {
     label: "My homes",
     icon: AiOutlineHome,
     href: "/homes",
