@@ -14,6 +14,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import CardSwiper from "../../components/CardSwiper";
 import AuthModal from "../../components/AuthModal";
 import ShareButton from "../../components/ShareButton";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 // Instantiate Prisma Client
 const prisma = new PrismaClient();
@@ -55,6 +56,7 @@ export async function getStaticProps({ params }) {
 const ListedHome = (home = null) => {
   const { data: session } = useSession();
   const [isOwner, setIsOwner] = useState(false);
+
   // console.log(isOwner);
   useEffect(() => {
     (async () => {
@@ -112,6 +114,41 @@ const ListedHome = (home = null) => {
     }
   };
 
+  const [favorites, setFavorites] = useState([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get("/api/user/favorites");
+        setFavorites(data);
+      } catch (e) {
+        setFavorites([]);
+      }
+    })();
+  }, []);
+
+  const isFavorite = !!favorites.find(favoriteId => favoriteId === home.id);
+
+  const toggleFavorite = id => {
+    try {
+      toast.dismiss("updateFavorite");
+      setFavorites(prev => {
+        const isFavorite = prev.find(favoriteId => favoriteId === id);
+        // Remove from favorite
+        if (isFavorite) {
+          axios.delete(`/api/homes/${id}/favorite`);
+          return prev.filter(favoriteId => favoriteId !== id);
+        }
+        // Add to favorite
+        else {
+          axios.put(`/api/homes/${id}/favorite`);
+          return [...prev, id];
+        }
+      });
+    } catch (e) {
+      toast.error("Unable to update favorite", { id: "updateFavorite" });
+    }
+  };
+
   // Fallback version
   if (router.isFallback) {
     return "Loading...";
@@ -128,35 +165,35 @@ const ListedHome = (home = null) => {
               </h1>
               <p className="text-gray-700">{home?.address ?? ""}</p>
             </div>
-            <div className="flex space-x-2 items-center ">
-            {isOwner ? (
-              <div className="flex items-center space-x-2">
-                <button
-                  type="button"
-                  disabled={deleting}
-                  onClick={() => router.push(`/homes/${home.id}/edit`)}
-                  className="flex items-center rounded-md border border-gray-800 px-4 py-1 text-lg text-gray-800 transition hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:bg-transparent disabled:text-gray-800 disabled:opacity-50"
-                >
-                  Edit 
-                  <span className="pl-1 text-center  text-xl">
-                    <BiEditAlt />
-                  </span>
-                </button>
+            <div className="flex items-center space-x-2 ">
+              {isOwner ? (
+                <div className="flex items-center space-x-2">
+                  <button
+                    type="button"
+                    disabled={deleting}
+                    onClick={() => router.push(`/homes/${home.id}/edit`)}
+                    className="flex items-center rounded-md border border-gray-800 px-4 py-1 text-lg text-gray-800 transition hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:bg-transparent disabled:text-gray-800 disabled:opacity-50"
+                  >
+                    Edit
+                    <span className="pl-1 text-center  text-xl">
+                      <BiEditAlt />
+                    </span>
+                  </button>
 
-                <button
-                  type="button"
-                  disabled={deleting}
-                  onClick={deleteHome}
-                  className=" flex items-center rounded-md border  border-red-700 px-4 py-1 text-center text-lg text-red-700 transition hover:bg-red-700 hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:bg-purple-700 disabled:text-white disabled:opacity-50"
-                >
-                  {deleting ? "Deleting..." : "Delete"}
-                  <span className="pl-1 text-center  text-xl">
-                    <MdDeleteOutline />
-                  </span>
-                </button>
-              </div>
-            ) : null}
-            <ShareButton id={home.id} />
+                  <button
+                    type="button"
+                    disabled={deleting}
+                    onClick={deleteHome}
+                    className=" flex items-center rounded-md border  border-red-700 px-4 py-1 text-center text-lg text-red-700 transition hover:bg-red-700 hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:bg-purple-700 disabled:text-white disabled:opacity-50"
+                  >
+                    {deleting ? "Deleting..." : "Delete"}
+                    <span className="pl-1 text-center  text-xl">
+                      <MdDeleteOutline />
+                    </span>
+                  </button>
+                </div>
+              ) : null}
+              <ShareButton id={home.id} />
             </div>
           </div>
           <div className="aspect-h-9 aspect-w-16 relative mt-6 overflow-hidden rounded-lg bg-gray-200 shadow-md">
@@ -234,20 +271,39 @@ const ListedHome = (home = null) => {
                 </p>
               </div>
             </div>
-            <div className="lg:h-96 h-80 lg:space-y-5 space-y-3 rounded-md bg-white p-5 py-10 shadow-md ">
-              <div className="">
-                <span className=" font-semibold text-gray-500 ">
-                  Rent Price
-                </span>
-                <p className="mb-2 text-xl font-bold tracking-tight text-purple-700 ">
-                  {new Intl.NumberFormat("en-IN", {
-                    style: "currency",
-                    currency: "INR",
-                  }).format(home.price ?? 0)}{" "}
-                  <span className=" text-sm font-normal text-gray-500">
-                    /month
+            <div className="h-80 space-y-3 rounded-md bg-white p-5 py-10 shadow-md lg:h-96 lg:space-y-5 ">
+              <div className="flex  justify-between items-center">
+                <div className="">
+                  <span className=" font-semibold text-gray-500 ">
+                    Rent Price
                   </span>
-                </p>
+                  <p className="mb-2 text-xl font-bold tracking-tight text-purple-700 ">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                    }).format(home.price ?? 0)}{" "}
+                    <span className=" text-sm font-normal text-gray-500">
+                      /month
+                    </span>
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={e => {
+                    e.preventDefault();
+                    session?.user ? toggleFavorite(home.id) : openModal();
+                  }}
+                  className=" flex h-10 w-10 items-center justify-center  rounded-full border border-purple-700 text-xl text-purple-800 "
+                >
+                  {/* <AiFillHeart className={`w-7 h-7  transition ${
+              favorite ? 'text-purple-800' : ' text-purple-300'
+            }`}  /> */}
+                  {isFavorite ? (
+                    <AiFillHeart className="h-7 w-7  text-purple-800 transition" />
+                  ) : (
+                    <AiOutlineHeart className="h-7 w-7  text-purple-700 transition" />
+                  )}
+                </button>
               </div>
               <div className="">
                 <span className=" font-semibold text-gray-500 ">Owner</span>
