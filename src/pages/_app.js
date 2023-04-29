@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import { Analytics } from "@vercel/analytics/react";
 
 // export default function App({ Component, pageProps }) {
 //   return <Component {...pageProps} />
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     <>
       <AuthProvider session={session}>
         <Component {...pageProps} />
+        <Analytics />
       </AuthProvider>
 
       <Toaster />
