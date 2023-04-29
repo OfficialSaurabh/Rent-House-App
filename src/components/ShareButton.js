@@ -39,7 +39,7 @@ function ShareButton({ id = home.id }) {
                     <div className="z-10 flex w-36 flex-col items-center justify-start gap-1 rounded-md bg-white p-4 shadow-md">
                       <div className="  rounded-md p-1 hover:bg-gray-200">
                         <WhatsappShareButton
-                          url={`https://rent-house-app.vercel.app/homes/${id}`}
+                          url={`https://rent-house.tech//homes/${id}`}
                           title={
                             "Find your next home with ease on our Rent House web app. With powerful search filters, detailed property descriptions, and high-quality photos."
                           }
@@ -54,7 +54,7 @@ function ShareButton({ id = home.id }) {
                       </div>
                       <div className="items-center rounded-md p-1 hover:bg-gray-200">
                         <TelegramShareButton
-                          url={`https://rent-house-app.vercel.app/homes/${id}`}
+                          url={`https://rent-house.tech//homes/${id}`}
                           title={
                             "Find your next home with ease on our Rent House web app. With powerful search filters, detailed property descriptions, and high-quality photos."
                           }
