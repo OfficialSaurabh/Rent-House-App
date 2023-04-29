@@ -13,29 +13,6 @@ import { BiShareAlt } from "react-icons/bi";
 function ShareButton({ id = home.id }) {
   return (
     <div>
-      {/* <WhatsappShareButton
-        url={`/homes/${id}`}
-        title={"next-share is a social share buttons for your next React apps."}
-        separator=":: "
-      >
-        <WhatsappIcon size={32} round />
-      </WhatsappShareButton>
-      <LinkedinShareButton url={"http://localhost:3000/homes/clguzf1lc0007txgwleqhbjhq"}>
-        <LinkedinIcon size={32} round />
-      </LinkedinShareButton>
-      <Popover className="relative">
-      <Popover.Button>Solutions</Popover.Button>
-
-      <Popover.Panel className="absolute z-10 bg-white ">
-        <div className="grid grid-cols-2  w-full">
-          <a href="/analytics" className="bg-white " >Analytics</a>
-          <a href="/engagement">Engagement</a>
-          <a href="/security">Security</a>
-          <a href="/integrations">Integrations</a>
-        </div>
-
-      </Popover.Panel>
-    </Popover> */}
       <div className=" w-full ">
         <Popover className="relative">
           {({ open }) => (
@@ -47,11 +24,6 @@ function ShareButton({ id = home.id }) {
               >
                 <BiShareAlt />
                 <span>Share</span>
-                {/* <ChevronDownIcon
-                className={`${open ? '' : 'text-opacity-70'}
-                  ml-2 h-5 w-5 text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}
-                aria-hidden="true"
-              /> */}
               </Popover.Button>
               <Transition
                 as={Fragment}
@@ -64,29 +36,34 @@ function ShareButton({ id = home.id }) {
               >
                 <Popover.Panel className=" absolute z-50 ">
                   <div className=" ">
-                    <div className="z-10 flex w-36 flex-col items-center gap-1 rounded-md bg-white p-4 shadow-md">
-                      <div className="flex w-36 cursor-pointer items-center justify-start space-x-1 rounded-md p-1 hover:bg-gray-200">
+                    <div className="z-10 flex w-36 flex-col items-center justify-start gap-1 rounded-md bg-white p-4 shadow-md">
+                      <div className="  rounded-md p-1 hover:bg-gray-200">
                         <WhatsappShareButton
                           url={`/homes/${id}`}
                           title={
-                            "next-share is a social share buttons for your next React apps."
+                            "Find your next home with ease on our Rent House web app. With powerful search filters, detailed property descriptions, and high-quality photos."
                           }
                           separator=":: "
+                          // className="flex items-center justify-start space-x-1"
                         >
-                          <WhatsappIcon size={32} round />
+                          <div className="flex items-center space-x-1 ">
+                            <WhatsappIcon size={32} round />
+                            <span className="">WhatsApp</span>
+                          </div>
                         </WhatsappShareButton>
-                        <span className="">WhatsApp</span>
                       </div>
-                      <div className="flex w-36 cursor-pointer items-center space-x-1 rounded-md p-1 hover:bg-gray-200">
+                      <div className="items-center rounded-md p-1 hover:bg-gray-200">
                         <TelegramShareButton
                           url={`/homes/${id}`}
                           title={
-                            "next-share is a social share buttons for your next React apps."
+                            "Find your next home with ease on our Rent House web app. With powerful search filters, detailed property descriptions, and high-quality photos."
                           }
                         >
-                          <TelegramIcon size={32} round />
+                          <div className="flex items-center space-x-1 ">
+                            <TelegramIcon size={32} round />
+                            <span className="">Telegram</span>
+                          </div>
                         </TelegramShareButton>
-                        <span className="">Telegram</span>
                       </div>
                     </div>
                   </div>
