@@ -12,6 +12,10 @@ import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 
 // import { HeartIcon } from '@heroicons/react/solid';
+// create fuction to classes and filter
+const cn = (...classes ) => {
+  return classes.filter(Boolean).join(' ')
+}
 
 const Card = ({
   id = "",
@@ -31,7 +35,7 @@ const Card = ({
   const { data: session, status } = useSession();
   const user = session?.user;
   const isLoadingUser = status === "loading";
-
+  const [isLoading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(true);
@@ -42,13 +46,20 @@ const Card = ({
       <div className="relative max-w-sm rounded-lg bg-white shadow-md hover:shadow-xl md:w-full xl:w-80">
         {/* <Image className="rounded-t-lg  " src="/dummyhouse.png" width={369} height={100} alt="" /> */}
         <div className=" aspect-h-10 aspect-w-16 overflow-hidden ">
-          {image ? (
+          {image ? 
+          (
             <Image
               src={image}
               alt={title}
               layout="fill"
               objectFit="cover"
-              className="rounded-t-lg transition hover:opacity-80  "
+              className={cn(
+                'duration-700 ease-in-out group-hover:opacity-75',
+                isLoading
+                  ? 'scale-110 blur-2xl grayscale'
+                  : 'scale-100 blur-0 grayscale-0'
+              )}
+              onLoadingComplete={() => setLoading(false)}
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center rounded-t-lg bg-gray-200">
