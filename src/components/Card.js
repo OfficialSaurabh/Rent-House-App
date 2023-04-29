@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/legacy/image";
 import PropTypes from "prop-types";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { BsStars, BsTriangleFill } from "react-icons/bs";
 import { BiBuildingHouse } from "react-icons/bi";
@@ -45,7 +45,7 @@ const Card = ({
     <Link href={`/homes/${id}`}>
       <div className="relative max-w-sm rounded-lg bg-white shadow-md hover:shadow-xl md:w-full xl:w-80">
         {/* <Image className="rounded-t-lg  " src="/dummyhouse.png" width={369} height={100} alt="" /> */}
-        <div className=" aspect-h-10 aspect-w-16 overflow-hidden ">
+        <div className=" aspect-h-10 rounded-t-md aspect-w-16 overflow-hidden ">
           {image ? 
           (
             <Image
