@@ -11,7 +11,7 @@ export default function Faq() {
             data-aos-duration="1000"
             className="-mx-2 flex flex-wrap sm:mx-auto sm:mb-2 "
           >
-            <div className="w-full px-4 py-2 ">
+            <div className="w-full py-2 ">
               <details className="mb-4">
                 <summary className="rounded-md text-purple-700 outline outline-1 outline-purple-400 hover:bg-purple-200 px-5 py-5 font-semibold">
                 How do I find rental properties on the website?

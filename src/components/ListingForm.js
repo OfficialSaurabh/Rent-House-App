@@ -77,7 +77,7 @@ const ListingForm = ({
     description: "",
     address: "",
     locality: "",
-    price: 0,
+    price: "",
     guests: 1,
     beds: 1,
     baths: 1,
@@ -107,7 +107,7 @@ const ListingForm = ({
                 name="title"
                 type="text"
                 label="Title"
-                placeholder="Entire rental unit - Amsterdam"
+                placeholder="Entire rental unit - Durgapur"
                 disabled={disabled}
               />
 
@@ -115,7 +115,7 @@ const ListingForm = ({
                 name="description"
                 type="textarea"
                 label="Description"
-                placeholder="Very charming and modern apartment in Amsterdam..."
+                placeholder="Very charming and modern house, apartment in Durgapur..."
                 disabled={disabled}
                 rows={5}
               />
@@ -138,7 +138,7 @@ const ListingForm = ({
                 type="number"
                 min="0"
                 label="Sqfeet"
-                placeholder="1"
+                placeholder="100"
                 disabled={disabled}
               />
 
@@ -147,7 +147,7 @@ const ListingForm = ({
                 type="number"
                 min="0"
                 label="Price per month"
-                placeholder="100"
+                placeholder="1000"
                 disabled={disabled}
               />
 
