@@ -57,7 +57,9 @@ const sendWelcomeEmail = async ({ user }) => {
       subject: "Welcome to RentHouse! 🎉",
       html: emailTemplate({
         base_url: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
-        support_email: "hmsaurabhkr@gmail.com",
+        support_email: "renthousek@gmail.com",
+        // idenntifer first name
+        first_name: user.name.split(" ")[0],
       }),
     });
   } catch (error) {
