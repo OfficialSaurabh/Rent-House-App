@@ -20,7 +20,7 @@ const LocalityDropdown = ({ locality, setlocality }) => {
       ];
       setLocalities(uniqueLocalities);
     });
-  }, []);
+  }, [  ]);
 
   return (
     <Menu as="div" className="dropdown relative">
@@ -49,6 +49,7 @@ const LocalityDropdown = ({ locality, setlocality }) => {
       <Menu.Items className="dropdown-menu text-start ">
         <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="All Locality"
             onClick={() => {
               setlocality("All Locality");
               setIsOpen(false);
@@ -61,6 +62,7 @@ const LocalityDropdown = ({ locality, setlocality }) => {
         {localities.map(locality => (
           <Menu.Item as="li" className="menu-item" key={locality}>
             <button
+            aria-label="locality"
               onClick={() => {
                 setlocality(locality);
                 setIsOpen(false);

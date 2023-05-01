@@ -83,6 +83,7 @@ const Card = ({
           </p>
           <button
             type="button"
+            aria-label="Favorite"
             onClick={e => {
               e.preventDefault();
               session?.user && typeof onClickFavorite === "function"

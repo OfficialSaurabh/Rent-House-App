@@ -45,6 +45,7 @@ const Landing = () => {
               <Link href={"/allhouses"}>
                 <button
                   type="button"
+                  aria-label="View All"
                   className="ml-4 rounded-md bg-purple-600 px-3 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
                 >
                   View All

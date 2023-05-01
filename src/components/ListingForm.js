@@ -196,6 +196,7 @@ const ListingForm = ({
             <div className="flex justify-end">
               <button
                 type="submit"
+                aria-label="Submit"
                 disabled={disabled || !isValid}
                 className="rounded-md bg-purple-600 px-6 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-600 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-purple-600"
               >
