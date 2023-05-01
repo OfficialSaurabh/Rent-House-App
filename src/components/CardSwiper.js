@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Pagination, Navigation } from "swiper";
+import { FreeMode, Pagination, Navigation, A11y } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
@@ -60,26 +60,46 @@ export default function CardSwiper() {
     <>
       <Swiper
         freeMode={true}
-        navigation={true}
+        navigation={{
+          enabled: true,
+        }}
         pagination={{
           clickable: true,
           dynamicBullets: true,
         }}
-        modules={[FreeMode, Pagination, Navigation]}
+        modules={[FreeMode, Pagination, Navigation, A11y]}
         className="mySwiper"
         // responsive breakpoints
         breakpoints={{
+          // break points for mobile devices
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            navigation: {
+              enabled: false,
+            },
+          },
           640: {
             slidesPerView: 2,
             spaceBetween: 20,
+            navigation: {
+              enabled: true,
+            },
           },
           768: {
             slidesPerView: 2,
             spaceBetween: 40,
+            navigation: {
+              enabled: true,
+            },
           },
           1024: {
             slidesPerView: 3,
             spaceBetween: 50,
+            navigation: {
+              enabled: true,
+            }
+           
           },
         }}
       >
