@@ -51,7 +51,7 @@ function Foot() {
             </Link>
           </li>
           <li>
-            <Link href="/" className="hover:text-purple-700 " rel="noreferrer">
+            <Link href="mailto:renthousek@gmail.com"className="hover:text-purple-700 " rel="noreferrer">
               Contact
             </Link>
           </li>

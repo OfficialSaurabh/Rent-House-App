@@ -170,6 +170,7 @@ const ListedHome = (home = null) => {
                 <div className="flex items-center space-x-2">
                   <button
                     type="button"
+                    aria-label="Edit home"
                     disabled={deleting}
                     onClick={() => router.push(`/homes/${home.id}/edit`)}
                     className="flex items-center rounded-md border border-gray-800 px-4 py-1 text-lg text-gray-800 transition hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:bg-transparent disabled:text-gray-800 disabled:opacity-50"
@@ -182,6 +183,7 @@ const ListedHome = (home = null) => {
 
                   <button
                     type="button"
+                    aria-label="Delete home"
                     disabled={deleting}
                     onClick={deleteHome}
                     className=" flex items-center rounded-md border  border-red-700 px-4 py-1 text-center text-lg text-red-700 transition hover:bg-red-700 hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:bg-purple-700 disabled:text-white disabled:opacity-50"
@@ -289,6 +291,7 @@ const ListedHome = (home = null) => {
                 </div>
                 <button
                   type="button"
+                  aria-label="Favorite home"
                   onClick={e => {
                     e.preventDefault();
                     session?.user ? toggleFavorite(home.id) : openModal();
@@ -329,6 +332,7 @@ const ListedHome = (home = null) => {
                       : openModal();
                   }}
                   type="button"
+                  aria-label="Show Contact"
                   className="flex w-full items-center justify-center rounded-md bg-purple-600 px-3 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
                 >
                   <span className="px-2 ">
@@ -346,6 +350,7 @@ const ListedHome = (home = null) => {
                       : openModal();
                   }}
                   type="button"
+                  aria-label="Contact Owner"
                   className="flex w-full items-center justify-center rounded-md bg-purple-600 px-3 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
                 >
                   <span className="px-2 ">

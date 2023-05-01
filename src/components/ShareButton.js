@@ -1,4 +1,6 @@
 import React from "react";
+import Head from "next/head";
+
 import {
   WhatsappShareButton,
   WhatsappIcon,
@@ -13,6 +15,14 @@ import { BiShareAlt } from "react-icons/bi";
 function ShareButton({ id = home.id }) {
   return (
     <div>
+      <Head>
+        <title>RentHouse</title>
+        <meta
+          name="The Rent House web app"
+          content="Find your next home with ease on our Rent House web app."
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className=" w-full ">
         <Popover className="relative">
           {({ open }) => (
@@ -41,7 +51,7 @@ function ShareButton({ id = home.id }) {
                         <WhatsappShareButton
                           url={`https://rent-house.tech//homes/${id}`}
                           title={
-                            "Find your next home with ease on our Rent House web app. With powerful search filters, detailed property descriptions, and high-quality photos."
+                            "Check this out! I found this awesome property on RentHouse."
                           }
                           separator=":: "
                           // className="flex items-center justify-start space-x-1"
@@ -56,7 +66,7 @@ function ShareButton({ id = home.id }) {
                         <TelegramShareButton
                           url={`https://rent-house.tech//homes/${id}`}
                           title={
-                            "Find your next home with ease on our Rent House web app. With powerful search filters, detailed property descriptions, and high-quality photos."
+                            "Check this out! I found this awesome property on RentHouse."
                           }
                         >
                           <div className="flex items-center space-x-1 ">

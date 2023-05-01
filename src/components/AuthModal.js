@@ -170,6 +170,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
               {/* Close icon */}
               <button
                 onClick={closeModal}
+                aria-label="Close"
                 className="absolute right-2 top-2 shrink-0 rounded-md p-1 transition hover:bg-gray-100 focus:outline-none"
               >
                 <AiOutlineClose className="h-5 w-5 text-black " />
@@ -209,6 +210,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                     {/* Sign with Google */}
                     <button
                       disabled={disabled}
+                      aria-label="Sign in with Google"
                       onClick={() => signInWithGoogle()}
                       className="mx-auto flex h-[46px] w-full items-center justify-center space-x-2 rounded-md border p-2 text-gray-500 transition-colors hover:border-gray-400 hover:bg-gray-50 hover:text-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-400 focus:ring-opacity-25 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-gray-200 disabled:hover:bg-transparent disabled:hover:text-gray-500"
                     >
@@ -235,6 +237,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
 
                           <button
                             type="submit"
+                            aria-label="Submit"
                             disabled={disabled || !isValid}
                             className="mt-6 w-full rounded-md bg-purple-600 px-8 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-600 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-purple-600"
                           >
@@ -249,6 +252,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                                 Don&apos;t have an account yet?{" "}
                                 <button
                                   type="button"
+                                  aria-label="Sign up"
                                   disabled={disabled}
                                   onClick={() => {
                                     setShowSignIn(false);
@@ -265,6 +269,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                                 Already have an account?{" "}
                                 <button
                                   type="button"
+                                  aria-label="Log in"
                                   disabled={disabled}
                                   onClick={() => {
                                     setShowSignIn(true);

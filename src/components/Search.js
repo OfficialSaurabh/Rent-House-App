@@ -44,6 +44,7 @@ const Search = ({ setFilter }) => {
           </div>
           <div className=" ">
             <button
+            aria-label="Search"
               onClick={() => {
                 handleClick();
               }}

@@ -67,6 +67,7 @@ const ImageUpload = ({
       <button
         disabled={updatingPicture}
         onClick={handleOnClickPicture}
+        aria-label="Image Upload"
         className={classNames(
           "group aspect-h-9 aspect-w-16 relative overflow-hidden rounded-md transition focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
           image?.src

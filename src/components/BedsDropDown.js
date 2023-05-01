@@ -37,6 +37,7 @@ const BedsDropDown = ({ bedroom, setBedroom }) => {
       <Menu.Items className="dropdown-menu text-center ">
       <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="All Types"
             onClick={() => {
               setBedroom("All Types");
               setIsOpen(false);
@@ -48,6 +49,7 @@ const BedsDropDown = ({ bedroom, setBedroom }) => {
         </Menu.Item>
         <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="1"
             onClick={() => {
               setBedroom("1");
               setIsOpen(false);
@@ -59,6 +61,7 @@ const BedsDropDown = ({ bedroom, setBedroom }) => {
         </Menu.Item>
         <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="2"
             onClick={() => {
               setBedroom("2");
               setIsOpen(false);
@@ -70,6 +73,7 @@ const BedsDropDown = ({ bedroom, setBedroom }) => {
         </Menu.Item>
         <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="3"
             onClick={() => {
               setBedroom("3");
               setIsOpen(false);
@@ -81,6 +85,7 @@ const BedsDropDown = ({ bedroom, setBedroom }) => {
         </Menu.Item>
         <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="4"
             onClick={() => {
               setBedroom("4");
               setIsOpen(false);

@@ -65,7 +65,7 @@ const Layout = ({ children = null }) => {
         <title>RentHouse</title>
         <meta
           name="The Rent House web app"
-          content="Find your next home with ease on our Rent House web app. Browse thousands of listings, from cozy apartments to spacious houses, and discover the perfect match for your lifestyle and budget. With powerful search filters, detailed property descriptions, and high-quality photos, you can quickly narrow down your options and find the home of your dreams. Our platform offers  easy communication with landlords, so you can rent with confidence. Start your search today and discover a new level of convenience in Rent House"
+          content="Find your next home with ease on our Rent House web app. Browse thousands of listings, from cozy apartments to spacious houses, and discover the perfect match for your lifestyle and budget."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -92,6 +92,7 @@ const Layout = ({ children = null }) => {
               </Link>
               <div className="flex items-center space-x-4">
                 <button
+                aria-label="List your home"
                   onClick={() => {
                     session?.user ? router.push("/create") : openModal();
                   }}
@@ -165,6 +166,8 @@ const Layout = ({ children = null }) => {
                                     </Link>
                                   ) : (
                                     <button
+                                      type="button"
+                                      aria-label="Name"
                                       className="flex w-full items-center space-x-2 rounded-md px-4 py-2 hover:bg-purple-100"
                                       onClick={onClick}
                                     >
@@ -183,6 +186,7 @@ const Layout = ({ children = null }) => {
                 ) : (
                   <button
                     type="button"
+                    aria-label="Log in"
                     onClick={openModal}
                     className="ml-4 rounded-md bg-purple-600 px-3 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
                   >
