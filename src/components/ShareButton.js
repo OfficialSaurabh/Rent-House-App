@@ -64,7 +64,7 @@ function ShareButton({ id = home.id }) {
                       </div>
                       <div className="items-center rounded-md p-1 hover:bg-gray-200">
                         <TelegramShareButton
-                          url={`https://rent-house.tech//homes/${id}`}
+                          url={`https://rent-house-app.vercel.app///homes/${id}`}
                           title={
                             "Check this out! I found this awesome property on RentHouse."
                           }
