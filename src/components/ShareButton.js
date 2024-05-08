@@ -49,7 +49,7 @@ function ShareButton({ id = home.id }) {
                     <div className="z-10 flex w-36 flex-col items-center justify-start gap-1 rounded-md bg-white p-4 shadow-md">
                       <div className="  rounded-md p-1 hover:bg-gray-200">
                         <WhatsappShareButton
-                          url={`https://rent-house.tech//homes/${id}`}
+                          url={`https://rent-house-app.vercel.app///homes/${id}`}
                           title={
                             "Check this out! I found this awesome property on RentHouse."
                           }

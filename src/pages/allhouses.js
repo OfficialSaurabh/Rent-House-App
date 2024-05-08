@@ -31,10 +31,14 @@ export default function Home() {
   });
   useEffect(() => {
     console.log(filter);
-    axios.get(`/api/get-homes?beds=${filter.beds}&lowerprice=${filter.lowerprice}&&upperprice=${filter.upperprice}&locality=${filter.locality}`).then(res => {
-      setHomes(res.data);
-      setLoading(false);
-    });
+    axios
+      .get(
+        `/api/get-homes?beds=${filter.beds}&lowerprice=${filter.lowerprice}&&upperprice=${filter.upperprice}&locality=${filter.locality}`
+      )
+      .then(res => {
+        setHomes(res.data);
+        setLoading(false);
+      });
   }, [filter]);
 
   if (loading) {
@@ -42,11 +46,14 @@ export default function Home() {
       <Layout>
         <div className="min-h-screen bg-gray-100 ">
           <div className="mx-auto max-w-screen-lg p-5 ">
-            <div className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:space-x-4">
+            <div className="">
               <div>
-                <h1 className="truncate text-2xl font-semibold text-gray-800 ">
+                {/* <h1 className="truncate text-2xl font-semibold text-gray-800 ">
                   Loading...
-                </h1>
+                </h1> */}
+                <div className=" flex w-full items-center justify-center  ">
+                  <div class="h-16 w-16 animate-spin rounded-full border-t-4 border-solid border-purple-700"></div>
+                </div>
               </div>
             </div>
           </div>
