@@ -10,6 +10,7 @@ datasource db {
   url      = env("NEXT_PUBLIC_DATABASE_URL")
 }
 
+
 // schema.prisma
 model Home {
   id          String   @id @default(cuid())
