@@ -3,12 +3,11 @@ import Layout from "@/components/Layout";
 import Grid from "@/components/Grid";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
 
 export async function getServerSideProps(context) {
   // Check if user is authenticated
   const session = await getSession(context);
-
+  
   // If not, redirect to the homepage
   if (!session) {
     return {
@@ -18,6 +17,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
+  const prisma = new PrismaClient();
   try {
     const testHomes = await prisma.home.findMany({ take: 1 });
     console.log("Favoutite DB OK", testHomes);
