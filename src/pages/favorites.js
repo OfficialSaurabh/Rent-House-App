@@ -18,7 +18,12 @@ export async function getServerSideProps(context) {
       },
     };
   }
-
+  try {
+    const testHomes = await prisma.home.findMany({ take: 1 });
+    console.log("Favoutite DB OK", testHomes);
+  } catch (err) {
+    console.error("DB Error:", err);
+  }
   // Get all homes from the authenticated user
   const homes = await prisma.home.findMany({
     where: {
