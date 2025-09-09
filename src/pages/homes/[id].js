@@ -20,16 +20,9 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 const prisma = new PrismaClient();
 
 export async function getStaticPaths() {
-  // Get all the homes IDs from the database
-  const homes = await prisma.home.findMany({
-    select: { id: true },
-  });
-
   return {
-    paths: homes.map(home => ({
-      params: { id: home.id },
-    })),
-    fallback: true,
+    paths: [],
+    fallback: 'blocking',
   };
 }
 
