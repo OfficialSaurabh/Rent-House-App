@@ -1,20 +1,26 @@
-import net from 'net';
+import { createClient } from '@supabase/supabase-js';
 
 export default async function handler(req, res) {
-  const client = new net.Socket();
-  client.setTimeout(5000); // 5 seconds timeout
+  // Use environment variables for security
+  const supabaseUrl = process.env.NEXT_PUBLIC_DATABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  client.connect(5432, 'db.zkessgtdajfbpoiwdpev.supabase.co', () => {
-    client.destroy();
-    res.status(200).json({ message: '✅ TCP Connection to Supabase succeeded!' });
-  });
+  if (!supabaseUrl || !supabaseKey) {
+    return res.status(500).json({ message: 'Supabase env variables missing' });
+  }
 
-  client.on('error', (err) => {
-    res.status(500).json({ message: '❌ TCP Connection failed', error: err.message });
-  });
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
-  client.on('timeout', () => {
-    res.status(500).json({ message: '❌ TCP Connection timed out' });
-    client.destroy();
-  });
+  try {
+    // Test: list tables or run a simple query
+    const { data, error } = await supabase.from('your_table_name').select('*').limit(1);
+
+    if (error) {
+      return res.status(500).json({ message: '❌ Supabase query failed', error: error.message });
+    }
+
+    res.status(200).json({ message: '✅ Supabase query succeeded', data });
+  } catch (err) {
+    res.status(500).json({ message: '❌ Supabase connection failed', error: err.message });
+  }
 }
