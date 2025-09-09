@@ -17,6 +17,7 @@ import ShareButton from "../../components/ShareButton";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 // Instantiate Prisma Client
+//Updated
 const prisma = new PrismaClient();
 
 export async function getStaticPaths() {
