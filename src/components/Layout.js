@@ -8,23 +8,15 @@ import { useSession, signOut } from "next-auth/react";
 import AuthModal from "./AuthModal";
 import { Menu, Transition } from "@headlessui/react";
 import Footer from "./Footer";
-// import {
-//   AiOutlineHeart,
-//   AiOutlineHome,
-//   AiOutlineLogout,
-//   AiOutlinePlus,
-//   HiOutlineSparkles,
-//   AiOutlineUser,
-// } from "@heroicons/react/outline";
-// import { HiOutlineChevronDown } from "@heroicons/react/solid";
+import Logo from "../../public/logo.png";
 import {
   AiOutlineHeart,
   AiOutlineHome,
   AiOutlineLogout,
   AiOutlinePlus,
-  AiOutlineUser
+  AiOutlineUser,
 } from "react-icons/ai";
-import {HiOutlineSparkles, HiOutlineChevronDown} from "react-icons/hi";
+import { HiOutlineSparkles, HiOutlineChevronDown } from "react-icons/hi";
 import { BiBuildingHouse } from "react-icons/bi";
 
 const menuItems = [
@@ -32,6 +24,11 @@ const menuItems = [
     label: "List a new home",
     icon: AiOutlinePlus,
     href: "/create",
+  },
+  {
+    label: "All Listings",
+    icon: BiBuildingHouse,
+    href: "/allhouses",
   },
   {
     label: "My homes",
@@ -67,40 +64,49 @@ const Layout = ({ children = null }) => {
       <Head>
         <title>RentHouse</title>
         <meta
-          name="title"
-          content="Learn how to Build a Fullstack App with Next.js, PlanetScale & Prisma | The Modern Dev"
+          name="The Rent House web app"
+          content="Find your next home with ease on our Rent House web app. Browse thousands of listings, from cozy apartments to spacious houses, and discover the perfect match for your lifestyle and budget."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen flex flex-col">
-        <header className="h-16 w-full shadow-md bg-white sticky top-0 z-50  ">
-          <div className="h-full container mx-auto  lg:max-w-7xl">
-            <div className="h-full px-4 flex justify-between items-center space-x-4">
+      <div className="flex min-h-screen flex-col">
+        <header className="sticky top-0 z-50 h-16 w-full bg-white shadow-md  ">
+          <div className="container mx-auto h-full  lg:max-w-7xl">
+            <div className="flex h-full items-center justify-between space-x-4 px-4">
               <Link legacyBehavior href="/">
-                <a className="flex items-center space-x-1">
-                  <BiBuildingHouse className="shrink-0 w-8 h-8 text-purple-800" />
-                  <span className="text-xl font-semibold tracking-wide text-purple-800">
+                <p className="flex items-center cursor-pointer  space-x-1">
+                  <Image
+                    src={Logo}
+                    alt="RentHouse"
+                    width={50}
+                    height={50}
+                    className="rounded-full"
+                  />
+
+                  {/* <BiBuildingHouse className="shrink-0 w-8 h-8 text-purple-800" /> */}
+                  <span className="text-2xl cursor-pointer font-semibold tracking-wide text-purple-800">
                     RentHouse
                   </span>
-                </a>
+                </p>
               </Link>
               <div className="flex items-center space-x-4">
                 <button
+                aria-label="List your home"
                   onClick={() => {
                     session?.user ? router.push("/create") : openModal();
                   }}
                   // className="hidden sm:block hover:bg-gray-200 transition px-3 py-1 rounded-md"
-                  className="hidden sm:block rounded-md  px-3 py-2 text-center text-purple-700 outline outline-1 outline-purple-400 hover:bg-purple-200"
+                  className="hidden rounded-md px-3  py-2 text-center text-purple-700 outline outline-1 outline-purple-400 hover:bg-purple-200 sm:block"
                 >
                   List your home
                 </button>
                 {isLoadingUser ? (
-                  <div className="h-8 w-[75px] bg-gray-200 animate-pulse rounded-md" />
+                  <div className="h-8 w-[75px] animate-pulse rounded-md bg-gray-200" />
                 ) : user ? (
                   <Menu as="div" className="relative z-50 text-gray-700 ">
-                    <Menu.Button className="flex items-center space-x-px group">
-                      <div className="shrink-0 flex items-center justify-center rounded-full overflow-hidden relative bg-gray-200 w-9 h-9">
+                    <Menu.Button className="group flex items-center space-x-px">
+                      <div className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-200">
                         {user?.image ? (
                           <Image
                             src={user?.image}
@@ -108,10 +114,10 @@ const Layout = ({ children = null }) => {
                             fill
                           />
                         ) : (
-                          <AiOutlineUser className="text-gray-400 w-6 h-6" />
+                          <AiOutlineUser className="h-6 w-6 text-gray-400" />
                         )}
                       </div>
-                      <HiOutlineChevronDown className="w-5 h-5 shrink-0 text-gray-500 group-hover:text-current" />
+                      <HiOutlineChevronDown className="h-5 w-5 shrink-0 text-gray-500 group-hover:text-current" />
                     </Menu.Button>
                     <Transition
                       as={Fragment}
@@ -122,9 +128,9 @@ const Layout = ({ children = null }) => {
                       leaveFrom="opacity-100 scale-100"
                       leaveTo="opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 w-72 overflow-hidden mt-1 divide-y divide-gray-100 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div className="flex items-center space-x-2 py-4 px-4 mb-2">
-                          <div className="shrink-0 flex items-center justify-center rounded-full overflow-hidden relative bg-gray-200 w-9 h-9">
+                      <Menu.Items className="absolute right-0 mt-1 w-72 origin-top-right divide-y divide-gray-100 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="mb-2 flex items-center space-x-2 px-4 py-4">
+                          <div className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-200">
                             {user?.image ? (
                               <Image
                                 src={user?.image}
@@ -132,7 +138,7 @@ const Layout = ({ children = null }) => {
                                 layout="fill"
                               />
                             ) : (
-                              <AiOutlineUser className="text-gray-400 w-6 h-6" />
+                              <AiOutlineUser className="h-6 w-6 text-gray-400" />
                             )}
                           </div>
                           <div className="flex flex-col truncate">
@@ -148,22 +154,24 @@ const Layout = ({ children = null }) => {
                             ({ label, href, onClick, icon: Icon }) => (
                               <div
                                 key={label}
-                                className="px-2 last:border-t last:pt-2 last:mt-2"
+                                className="px-2 last:mt-2 last:border-t last:pt-2"
                               >
                                 <Menu.Item>
                                   {href ? (
                                     <Link legacyBehavior href={href}>
-                                      <a className="flex items-center space-x-2 py-2 px-4 rounded-md hover:bg-purple-100">
-                                        <Icon className="w-5 h-5 shrink-0 text-gray-500" />
+                                      <a className="flex items-center space-x-2 rounded-md px-4 py-2 hover:bg-purple-100">
+                                        <Icon className="h-5 w-5 shrink-0 text-gray-500" />
                                         <span>{label}</span>
                                       </a>
                                     </Link>
                                   ) : (
                                     <button
-                                      className="w-full flex items-center space-x-2 py-2 px-4 rounded-md hover:bg-purple-100"
+                                      type="button"
+                                      aria-label="Name"
+                                      className="flex w-full items-center space-x-2 rounded-md px-4 py-2 hover:bg-purple-100"
                                       onClick={onClick}
                                     >
-                                      <Icon className="w-5 h-5 shrink-0 text-gray-500" />
+                                      <Icon className="h-5 w-5 shrink-0 text-gray-500" />
                                       <span>{label}</span>
                                     </button>
                                   )}
@@ -178,8 +186,9 @@ const Layout = ({ children = null }) => {
                 ) : (
                   <button
                     type="button"
+                    aria-label="Log in"
                     onClick={openModal}
-                    className="ml-4 px-3 py-2 rounded-md bg-purple-600 hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 text-white transition"
+                    className="ml-4 rounded-md bg-purple-600 px-3 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
                   >
                     Log in
                   </button>

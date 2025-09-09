@@ -12,10 +12,14 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      borderRadius: {
+        extraLarge: '12rem'
+      },
     },
   },
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
+    // require('@tailwindcss/line-clamp'),
   ],
 }

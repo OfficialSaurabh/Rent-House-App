@@ -8,7 +8,7 @@ module.exports = nextConfig
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['vxwxkybimhtyuhmkssvh.supabase.co', 'vxwxkybimhtyuhmkssvh.supabase.in', 'lh3.googleusercontent.com'],
+    domains: ['zkessgtdajfbpoiwdpev.supabase.in', 'zkessgtdajfbpoiwdpev.supabase.co', 'zkessgtdajfbpoiwdpev.supabase.in', 'lh3.googleusercontent.com'],
   },
   // future: {
   //   webpack5: true, // by default, if you customize webpack config, they switch back to version 4. 

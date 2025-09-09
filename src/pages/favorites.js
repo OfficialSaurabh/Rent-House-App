@@ -1,6 +1,6 @@
-import { getSession } from 'next-auth/react';
-import Layout from '@/components/Layout';
-import Grid from '@/components/Grid';
+import { getSession } from "next-auth/react";
+import Layout from "@/components/Layout";
+import Grid from "@/components/Grid";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -13,18 +13,23 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/',
+        destination: "/",
         permanent: false,
       },
     };
   }
-
+  try {
+    const testHomes = await prisma.home.findMany({ take: 1 });
+    console.log("Favoutite DB OK", testHomes);
+  } catch (err) {
+    console.error("DB Error:", err);
+  }
   // Get all homes from the authenticated user
   const homes = await prisma.home.findMany({
     where: {
       favoritedBy: { some: { email: session.user.email } },
     },
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
   });
 
   // Pass the data to the Homes component
@@ -38,20 +43,18 @@ export async function getServerSideProps(context) {
 const Favorites = ({ homes = [] }) => {
   return (
     <Layout>
-        <section className="bg-gray-100 min-h-screen ">
-          <div className="mx-auto w-3/4 border border-none py-10">
-            <h1 className="text-2xl font-medium text-gray-800">
-              Your Favourites
-            </h1>
-            <p className="text-gray-500">
-            All your favorites homes in one place
-            </p>
-            <div className="  flex justify-center">
-              <Grid homes={homes} />
-            </div>
+      <section className="min-h-screen bg-gray-100 ">
+        <div className="mx-auto w-3/4 border border-none py-10">
+          <h1 className="text-2xl font-medium text-gray-800">
+            Your Favourites
+          </h1>
+          <p className="text-gray-500">All your favorites homes in one place</p>
+          <div className="  flex justify-center">
+            <Grid homes={homes} />
           </div>
-        </section>
-      </Layout>
+        </div>
+      </section>
+    </Layout>
   );
 };
 

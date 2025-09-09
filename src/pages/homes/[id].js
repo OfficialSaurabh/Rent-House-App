@@ -1,32 +1,30 @@
 import Image from "next/legacy/image";
+import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { BiBed, BiBath, BiArea } from "react-icons/bi";
-import { BsStars, BsTriangleFill } from "react-icons/bs";
+import { BiBed, BiBath, BiArea, BiEditAlt } from "react-icons/bi";
+import { BsStars, BsTriangleFill, BsPeople, BsTelephone } from "react-icons/bs";
 import { BiBuildingHouse } from "react-icons/bi";
-import {MdDeleteOutline} from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 import CardSwiper from "../../components/CardSwiper";
+import AuthModal from "../../components/AuthModal";
+import ShareButton from "../../components/ShareButton";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 // Instantiate Prisma Client
+//Updated
 const prisma = new PrismaClient();
 
 export async function getStaticPaths() {
-  // Get all the homes IDs from the database
-  const homes = await prisma.home.findMany({
-    select: { id: true },
-  });
-
   return {
     paths: homes.map(home => ({
       params: { id: home.id },
     })),
-    fallback: 'blocking',
-  };
 }
 
 export async function getStaticProps({ params }) {
@@ -52,18 +50,41 @@ export async function getStaticProps({ params }) {
 const ListedHome = (home = null) => {
   const { data: session } = useSession();
   const [isOwner, setIsOwner] = useState(false);
+
+  // console.log(isOwner);
   useEffect(() => {
     (async () => {
       if (session?.user) {
         try {
           const owner = await axios.get(`/api/homes/${home.id}/owner`);
-          setIsOwner(owner?.id === session.user.id);
+          setIsOwner(owner.data.email === session.user.email);
+          // console.log(session.user.email);
         } catch (e) {
           setIsOwner(false);
         }
       }
     })();
-  }, [session?.user]);
+  }, [session?.user, home.id]);
+
+  // const user = session?.user;
+  // const isLoadingUser = status === "loading";
+
+  // Show onwer contact info
+  const [showOnwer, setShowOwner] = useState(false);
+  useEffect(() => {
+    (async () => {
+      try {
+        setShowOwner(true);
+      } catch (e) {
+        setShowOwner(false);
+      }
+    })();
+  }, [home.id]);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   // Retrieve the Next.js router
   const router = useRouter();
@@ -87,61 +108,91 @@ const ListedHome = (home = null) => {
     }
   };
 
+  const [favorites, setFavorites] = useState([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get("/api/user/favorites");
+        setFavorites(data);
+      } catch (e) {
+        setFavorites([]);
+      }
+    })();
+  }, []);
+
+  const isFavorite = !!favorites.find(favoriteId => favoriteId === home.id);
+
+  const toggleFavorite = id => {
+    try {
+      toast.dismiss("updateFavorite");
+      setFavorites(prev => {
+        const isFavorite = prev.find(favoriteId => favoriteId === id);
+        // Remove from favorite
+        if (isFavorite) {
+          axios.delete(`/api/homes/${id}/favorite`);
+          return prev.filter(favoriteId => favoriteId !== id);
+        }
+        // Add to favorite
+        else {
+          axios.put(`/api/homes/${id}/favorite`);
+          return [...prev, id];
+        }
+      });
+    } catch (e) {
+      toast.error("Unable to update favorite", { id: "updateFavorite" });
+    }
+  };
+
   // Fallback version
   if (router.isFallback) {
     return "Loading...";
   }
+
   return (
     <Layout>
-      <div className="bg-gray-100 min-h-screen ">
-        <div className="max-w-screen-lg mx-auto p-5 ">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:space-x-4 space-y-4">
+      <div className="min-h-screen bg-gray-100 ">
+        <div className="mx-auto max-w-screen-lg p-5 ">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:space-x-4">
             <div>
-              <h1 className="text-2xl font-semibold truncate text-gray-800 ">
+              <h1 className="truncate text-3xl font-semibold text-gray-800 ">
                 {home?.title ?? ""}
               </h1>
-              <ol className="inline-flex items-center space-x-1 text-gray-700">
-                <li>
-                  <span>{home?.guests ?? 0} guests</span>
-                  <span aria-hidden="true"> · </span>
-                </li>
-                <li>
-                  <span>{home?.beds ?? 0} beds</span>
-                  <span aria-hidden="true"> · </span>
-                </li>
-                <li>
-                  <span>{home?.baths ?? 0} baths</span>
-                </li>
-                <li>
-                  <span>{home?.sqfeet ?? 0} sqfeet</span>
-                </li>
-              </ol>
               <p className="text-gray-700">{home?.address ?? ""}</p>
             </div>
-            {isOwner ? (
-              <div className="flex items-center space-x-2">
-                <button
-                  type="button"
-                  disabled={deleting}
-                  onClick={() => router.push(`/homes/${home.id}/edit`)}
-                  className="px-4 py-1 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition rounded-md disabled:text-gray-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Edit
-                </button>
+            <div className="flex items-center space-x-2 ">
+              {isOwner ? (
+                <div className="flex items-center space-x-2">
+                  <button
+                    type="button"
+                    aria-label="Edit home"
+                    disabled={deleting}
+                    onClick={() => router.push(`/homes/${home.id}/edit`)}
+                    className="flex items-center rounded-md border border-gray-800 px-4 py-1 text-lg text-gray-800 transition hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:bg-transparent disabled:text-gray-800 disabled:opacity-50"
+                  >
+                    Edit
+                    <span className="pl-1 text-center  text-xl">
+                      <BiEditAlt />
+                    </span>
+                  </button>
 
-                <button
-                  type="button"
-                  disabled={deleting}
-                  onClick={deleteHome}
-                  className=" flex text-center   rounded-md border border-purple-700 text-purple-800 hover:bg-purple-700 hover:text-white focus:outline-none transition disabled:bg-purple-700 disabled:text-white disabled:opacity-50 disabled:cursor-not-allowed px-4 py-1"
-                >
-                  {deleting ? "Deleting..." : "Delete"}
-                  {/* <span className="text-xl  text-center"><MdDeleteOutline/></span> */}
-                </button>
-              </div>
-            ) : null}
+                  <button
+                    type="button"
+                    aria-label="Delete home"
+                    disabled={deleting}
+                    onClick={deleteHome}
+                    className=" flex items-center rounded-md border  border-red-700 px-4 py-1 text-center text-lg text-red-700 transition hover:bg-red-700 hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:bg-purple-700 disabled:text-white disabled:opacity-50"
+                  >
+                    {deleting ? "Deleting..." : "Delete"}
+                    <span className="pl-1 text-center  text-xl">
+                      <MdDeleteOutline />
+                    </span>
+                  </button>
+                </div>
+              ) : null}
+              <ShareButton id={home.id} />
+            </div>
           </div>
-          <div className="mt-6 relative aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg shadow-md overflow-hidden">
+          <div className="aspect-h-9 aspect-w-16 relative mt-6 overflow-hidden rounded-lg bg-gray-200 shadow-md">
             {home?.image ? (
               <Image
                 src={home.image}
@@ -151,73 +202,166 @@ const ListedHome = (home = null) => {
               />
             ) : null}
           </div>
-          <div className=" grid grid-cols-1 grid-flow-row md:grid-cols-2 py-5 gap-10  ">
-            <div className="">
-              <h1 className="text-2xl text-gray-700 font-bold ">Overview</h1>
-              <p className=" text-lg text-gray-800 ">
-                {home?.description ?? ""}
-              </p>
-            </div>
-            <div className=" bg-white p-5 lg:p-10 rounded-md shadow-md ">
-              <p className="mb-2 text-xl font-bold tracking-tight text-purple-700 ">
-                {new Intl.NumberFormat("en-IN", {
-                  style: "currency",
-                  currency: "INR",
-                }).format(home.price ?? 0)}{" "}
-                <span className=" text-sm font-normal text-gray-500">
-                  /month
-                </span>
-              </p>
-              <p className="mb-3 font-normal text-gray-700 line-clamp-1   ">
-                {home.address ?? ""}
-              </p>
-              <div className="flex flex-wrap justify-start gap-5 lg:gap-10 py-3">
-                <p className="flex items-center py-2   ">
-                  <span className="text-xl text-purple-800 ">
-                    <BiBed />
+          <div className="grid grid-cols-1 gap-5 py-5  lg:grid-cols-3">
+            <div className="col-span-0 space-y-10 lg:col-span-2 ">
+              <div className=" flex items-center justify-between rounded-md border border-gray-300 bg-white px-5 py-3 shadow-sm ">
+                <div className=" space-y-1 ">
+                  <span className="hidden font-semibold text-gray-500 md:block">
+                    Bedrooms
                   </span>
-                  <span className="px-1 text-lg text-gray-700">
-                    {home.beds ?? 0} Beds
+                  <div className=" flex items-center">
+                    <span className="text-xl text-gray-400 ">
+                      <BiBed />
+                    </span>
+                    <span className="px-1 text-xl font-semibold text-gray-700">
+                      {home.beds ?? 0}
+                    </span>
+                  </div>
+                </div>
+                <div className=" space-y-1 ">
+                  <span className="hidden font-semibold text-gray-500 md:block">
+                    Bathrooms
                   </span>
-                </p>
-                <p className="flex items-center   ">
-                  <span className="text-xl text-purple-800 ">
-                    <BiBath />
+                  <div className=" flex items-center">
+                    <span className="text-xl text-gray-400 ">
+                      <BiBath />
+                    </span>
+                    <span className="px-1 text-xl font-semibold text-gray-700">
+                      {home.baths ?? 0}
+                    </span>
+                  </div>
+                </div>
+                <div className=" space-y-1 ">
+                  <span className="hidden font-semibold text-gray-500 md:block">
+                    SqFeet
                   </span>
-                  <span className="px-1 text-lg text-gray-700">
-                    {home.baths ?? 0} Bathrooms
+                  <div className=" flex items-center">
+                    <span className="text-xl text-gray-400 ">
+                      <BiArea />
+                    </span>
+                    <span className="px-1 text-xl font-semibold text-gray-700">
+                      {home.sqfeet ?? 0}
+                    </span>
+                  </div>
+                </div>
+                <div className=" space-y-1 ">
+                  <span className="hidden font-semibold text-gray-500 md:block">
+                    Guests
                   </span>
-                </p>
-                <p className=" flex items-center   ">
-                  <span className="text-xl text-purple-800 ">
-                    <BiArea />
-                  </span>
-                  <span className="px-1 text-lg text-gray-700">
-                    {" "}
-                    {home.sqfeet ?? 0} Sqfeet
-                  </span>
+                  <div className=" flex items-center">
+                    <span className="text-xl text-gray-400 ">
+                      <BsPeople />
+                    </span>
+                    <span className="px-1 text-xl font-semibold text-gray-700">
+                      {home.guests ?? 0}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-5">
+                <h1 className="text-2xl font-bold text-gray-700 ">
+                  About this house
+                </h1>
+                <p className=" text-lg text-gray-800  ">
+                  {home?.description ?? ""}
                 </p>
               </div>
-              <div className="py-5">
+            </div>
+            <div className="h-80 space-y-3 rounded-md bg-white p-5 py-10 shadow-md lg:h-96 lg:space-y-5 ">
+              <div className="flex  justify-between items-center">
+                <div className="">
+                  <span className=" font-semibold text-gray-500 ">
+                    Rent Price
+                  </span>
+                  <p className="mb-2 text-xl font-bold tracking-tight text-purple-700 ">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                    }).format(home.price ?? 0)}{" "}
+                    <span className=" text-sm font-normal text-gray-500">
+                      /month
+                    </span>
+                  </p>
+                </div>
                 <button
                   type="button"
-                  className=" rounded-md  px-3 py-2 text-center text-purple-700 outline outline-1 outline-purple-400 hover:bg-purple-200"
+                  aria-label="Favorite home"
+                  onClick={e => {
+                    e.preventDefault();
+                    session?.user ? toggleFavorite(home.id) : openModal();
+                  }}
+                  className=" flex h-10 w-10 items-center justify-center  rounded-full border border-purple-700 text-xl text-purple-800 "
                 >
-                  Add to Favorites
+                  {/* <AiFillHeart className={`w-7 h-7  transition ${
+              favorite ? 'text-purple-800' : ' text-purple-300'
+            }`}  /> */}
+                  {isFavorite ? (
+                    <AiFillHeart className="h-7 w-7  text-purple-800 transition" />
+                  ) : (
+                    <AiOutlineHeart className="h-7 w-7  text-purple-700 transition" />
+                  )}
                 </button>
+              </div>
+              <div className="">
+                <span className=" font-semibold text-gray-500 ">Owner</span>
+                <p className="mb-3 line-clamp-1 font-bold text-gray-700   ">
+                  {home.ownerName ?? ""}
+                </p>
+              </div>
+              <div className="space-y-2">
+                <span className=" font-semibold text-gray-500 ">Posted On</span>
+                <p className="mb-3 line-clamp-1 w-36 rounded-md bg-purple-200 p-1 font-medium text-purple-700 outline outline-1 outline-purple-400  ">
+                  {new Date(home.createdAt).toDateString() ?? ""}
+                </p>
+              </div>
+              {/* Dextop View Show owner contact */}
+              <div className="hidden space-y-2 p-5 text-center lg:block  ">
+                <Link href="tel:${showOnwer}" className=" ">
+                  {showOnwer}
+                </Link>
                 <button
+                  onClick={() => {
+                    session?.user
+                      ? setShowOwner(`${home.contact}`)
+                      : openModal();
+                  }}
                   type="button"
-                  className="ml-4 px-3 py-2 rounded-md bg-purple-600 hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 text-white transition"
+                  aria-label="Show Contact"
+                  className="flex w-full items-center justify-center rounded-md bg-purple-600 px-3 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
                 >
+                  <span className="px-2 ">
+                    <BsTelephone />
+                  </span>
+                  Show Contact
+                </button>
+              </div>
+              {/* Mobile view Contact onwer button */}
+              <div className=" block p-5 lg:hidden ">
+                <button
+                  onClick={() => {
+                    session?.user
+                      ? router.push(`tel:${home.contact}`)
+                      : openModal();
+                  }}
+                  type="button"
+                  aria-label="Contact Owner"
+                  className="flex w-full items-center justify-center rounded-md bg-purple-600 px-3 py-2 text-white transition hover:bg-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
+                >
+                  <span className="px-2 ">
+                    <BsTelephone />
+                  </span>
                   Contact Owner
                 </button>
               </div>
             </div>
           </div>
           <div className=" mt-10 ">
-                <p className=" text-2xl text-gray-700 font-bold py-5 ">Similar Houses</p>
+            <p className=" py-5 text-2xl font-bold text-gray-700 ">
+              Similar Houses
+            </p>
             <CardSwiper />
           </div>
+          <AuthModal show={showModal} onClose={closeModal} />
         </div>
       </div>
     </Layout>

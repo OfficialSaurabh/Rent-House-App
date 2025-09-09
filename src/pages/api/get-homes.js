@@ -19,16 +19,21 @@ export default async function handler(req, res) {
     where: {}
   };
 
-  if (params.beds) {
-    filter.where.beds = parseInt(params.beds);
+  if (params.locality && params.locality !== "All Locality") {
+    filter.where.locality = params.locality;
   }
 
-  if (params.lowerPrice && params.upperPrice) {
+  if (params.beds && params.beds !== 'NaN') {
+    filter.where.beds = parseInt(params.beds)  ;
+  }
+
+  if (params.lowerprice && params.upperprice) {
     filter.where.price = {
-      gte: parseInt(params.lowerPrice),
-      lte: parseInt(params.upperPrice),
+      gte: parseInt(params.lowerprice),
+      lte: parseInt(params.upperprice),
     };
   }
+
 
   // Get homes by bedrooms
   if (req.method === "GET" && Object.keys(params).length) {

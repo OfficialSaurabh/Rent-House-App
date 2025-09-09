@@ -7,8 +7,8 @@ import { BiBed } from "react-icons/bi";
 import { Menu } from "@headlessui/react";
 // import context
 
-const BedsDropDown = () => {
-  const [ bedroom, setBedroom] = useState("");
+
+const BedsDropDown = ({ bedroom, setBedroom }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Menu as="div" className="dropdown relative  ">
@@ -18,8 +18,14 @@ const BedsDropDown = () => {
       >
         <BiBed className="dropdown-icon-primary" />
         <div>
-          <div className="text-sm text-gray-500 font-medium py-1 "> Bedrooms</div>
-          <div className="sm:text-md text-sm font-medium leading-tight"> {bedroom} </div>
+          <div className="py-1 text-sm font-medium text-gray-500 ">
+            {" "}
+            Bedrooms
+          </div>
+          <div className="sm:text-md text-sm font-medium leading-tight">
+            {" "}
+            {bedroom}{" "}
+          </div>
         </div>
         {isOpen ? (
           <RiArrowUpSLine className="dropdown-icon-secondary" />
@@ -29,8 +35,21 @@ const BedsDropDown = () => {
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu text-center ">
-       <Menu.Item as="li" className="menu-item">
+      <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="All Types"
+            onClick={() => {
+              setBedroom("All Types");
+              setIsOpen(false);
+            }}
+            className="menu-item-btn"
+          >
+            All Types
+          </button>
+        </Menu.Item>
+        <Menu.Item as="li" className="menu-item">
+          <button
+          aria-label="1"
             onClick={() => {
               setBedroom("1");
               setIsOpen(false);
@@ -42,6 +61,7 @@ const BedsDropDown = () => {
         </Menu.Item>
         <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="2"
             onClick={() => {
               setBedroom("2");
               setIsOpen(false);
@@ -53,6 +73,7 @@ const BedsDropDown = () => {
         </Menu.Item>
         <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="3"
             onClick={() => {
               setBedroom("3");
               setIsOpen(false);
@@ -64,6 +85,7 @@ const BedsDropDown = () => {
         </Menu.Item>
         <Menu.Item as="li" className="menu-item">
           <button
+          aria-label="4"
             onClick={() => {
               setBedroom("4");
               setIsOpen(false);
@@ -73,7 +95,6 @@ const BedsDropDown = () => {
             4
           </button>
         </Menu.Item>
-
       </Menu.Items>
     </Menu>
   );
