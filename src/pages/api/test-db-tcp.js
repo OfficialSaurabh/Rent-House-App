@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 export default async function handler(req, res) {
   // Use environment variables for security
-  const supabaseUrl = process.env.DATABASE_URL;
+  const supabaseUrl = process.env.NEXT_PUBLIC_DATABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
