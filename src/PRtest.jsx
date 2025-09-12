@@ -6,7 +6,7 @@ const PR = () => {
       <h1>Dummy Pull Request Component</h1>
       <p>This is a placeholder component for testdfgdfsdfsdfsdfsdfsdfgdfgdfging purposes. added tststsgdgdgdgdgdg</p>
       <button
-        onClick={() => alert('Dummy PR button clicked!') sfsdfsdf {}sdfsdfsdf}
+        onClick={() => alert('Dummy PR button clicked!') sfsdfsdf {sadcvb567{}}sdfsdfsdf}
         style={{
           padding: '10px 20px',
           backgroundColor: '#4CAF50',
