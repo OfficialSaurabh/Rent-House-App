@@ -4,9 +4,9 @@ const PR = () => {
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>Dummy Pull Request Component</h1>
-      <p>This is a placeholder component for testing purposes.</p>
+      <p>This is a placeholder component for testdfgdfsdfsdfsdfsdfsdfgdfgdfging purposes. added tststsgdgdgdgdgdg</p>
       <button
-        onClick={() => alert('Dummy PR button clicked!')}
+        onClick={() => alert('Dummy PR button clicked!') sfsdfsdf {}sdfsdfsdf}
         style={{
           padding: '10px 20px',
           backgroundColor: '#4CAF50',
